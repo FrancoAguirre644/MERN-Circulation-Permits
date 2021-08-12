@@ -11,6 +11,10 @@ const userSchema = new moongose.Schema({
         required: true,
         unique: true
     },
+    profile: {
+        type: String,
+        default: 'user'
+    },
     password: {
         type: String,
         required: true

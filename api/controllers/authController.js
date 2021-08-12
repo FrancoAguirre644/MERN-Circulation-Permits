@@ -2,7 +2,7 @@ const Users = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const userController = {
+const authController = {
     registerUser: async (req, res) => {
         try {
             const { username, email, password } = req.body;
@@ -53,4 +53,4 @@ const userController = {
     },
 }
 
-module.exports = userController
+module.exports = authController

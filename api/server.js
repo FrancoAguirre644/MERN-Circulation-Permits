@@ -2,7 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const userRouter = require('./routes/userRouter')
+const authRouter = require('./routes/authRouter')
+const profileRouter = require('./routes/profileRouter')
 
 const app = express()
 app.use(express.json())
@@ -10,8 +11,8 @@ app.use(cors())
 
 // Routes
 
-app.use('/users', userRouter) /*
-app.use('/api/notes', noteRouter) */
+app.use('/users', authRouter)
+app.use('/api/v1/profiles', profileRouter)
 
 // Listen Server
 
@@ -29,6 +30,6 @@ mongoose.connect(URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, err => {
-    if(err) throw err;
+    if (err) throw err;
     console.log('Connected to MongoDB')
 })
