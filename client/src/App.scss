@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* === Plugin styles === */
+
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+@import "../public/assets/styles/variables";
+@import "~compass-mixins/lib/compass";
+@import "~compass-mixins/lib/animate";
+@import "~bootstrap/scss/bootstrap";
+@import "../public/assets/styles/fonts";
+@import "../public/assets/styles/functions";
+
+/* === Icon fonts === */
+@import "~@mdi/font/scss/materialdesignicons";
+
+
+/* === Template mixins === */
+@import "../public/assets/styles/mixins/animation";
+@import "../public/assets/styles/mixins/badges";
+@import "../public/assets/styles/mixins/buttons";
+@import "../public/assets/styles/mixins/misc";
+@import "../public/assets/styles/mixins/color-functions";
+@import "../public/assets/styles/mixins/cards";
+@import "../public/assets/styles/mixins/blockqoute";
+
+
+/* === Core Styles === */
+@import "../public/assets/styles/typography";
+@import "../public/assets/styles/reset";
+@import "../public/assets/styles/responsive";
+@import "../public/assets/styles/misc";
+@import "../public/assets/styles/utilities";
+@import "../public/assets/styles/demo";
+@import "../public/assets/styles/spinner";
+@import "../public/assets/styles/dashboard";
+
+/* === Components === */
+
+@import "../public/assets/styles/components/checkbox-radio";
+@import "../public/assets/styles/components/forms";
+@import "../public/assets/styles/components/icons";
+@import "../public/assets/styles/components/tables";
+@import "../public/assets/styles/components/buttons";
+@import "../public/assets/styles/components/breadcrumbs";
+@import "../public/assets/styles/components/badges";
+@import "../public/assets/styles/components/cards";
+@import "../public/assets/styles/components/preview";
+@import "../public/assets/styles/components/lists";
+@import "../public/assets/styles/components/todo-list";
+@import "../public/assets/styles/components/dropdowns";
+@import "../public/assets/styles/components/loaders/loaders";
+
+@import "../public/assets/styles/components/landing-screens/auth";
+
+/* === Plugin Overrides === */
+@import "../public/assets/styles/components/plugin-overrides/slick-carousel";
+@import "../public/assets/styles/components/plugin-overrides/jquery-jvectormap";
+
+/* === Layout === */
+@import "../public/assets/styles/navbar";
+@import "../public/assets/styles/sidebar";
+@import "../public/assets/styles/footer";
+@import "../public/assets/styles/layout";
