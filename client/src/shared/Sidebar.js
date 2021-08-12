@@ -240,14 +240,6 @@ class Sidebar extends Component {
               </div>
             </Collapse>
           </li>
-          <li className="nav-item menu-items">
-            <a className="nav-link" href="http://bootstrapdash.com/demo/corona-react-free/documentation/documentation.html" rel="noopener noreferrer" target="_blank">
-              <span className="menu-icon">
-                <i className="mdi mdi-file-document-box"></i>
-              </span>
-              <span className="menu-title"><Trans>Documentation</Trans></span>
-            </a>
-          </li>
         </ul>
       </nav>
     );

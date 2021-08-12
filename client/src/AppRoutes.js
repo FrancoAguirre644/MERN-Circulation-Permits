@@ -1,5 +1,7 @@
-import React, { Component,Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
+
+import Profiles from './components/profile/Index'
 
 import Spinner from './shared/Spinner';
 
@@ -15,27 +17,28 @@ const Login = lazy(() => import('./user-pages/Login'));
 const Register1 = lazy(() => import('./user-pages/Register'));
 
 
-class AppRoutes extends Component {
-  render () {
-    return (
-      <Suspense fallback={<Spinner/>}>
-        <Switch>
+const AppRoutes = () => {
 
-          <Route path="/basic-ui/buttons" component={ Buttons } />
-          <Route path="/basic-ui/dropdowns" component={ Dropdowns } />
-          <Route path="/basic-ui/typography" component={ Typography } />
+  return (
+    <Suspense fallback={<Spinner />}>
+      <Switch>
 
-          <Route path="/tables/basic-table" component={ BasicTable } />
+        <Route path="/basic-ui/buttons" component={Buttons} />
+        <Route path="/basic-ui/dropdowns" component={Dropdowns} />
+        <Route path="/basic-ui/typography" component={Typography} />
 
-          <Route path="/icons/mdi" component={ Mdi } />
+        <Route path="/tables/basic-table" component={BasicTable} />
 
-          <Route path="/user-pages/login-1" component={ Login } />
-          <Route path="/user-pages/register-1" component={ Register1 } />
+        <Route path="/icons/mdi" component={Mdi} />
 
-        </Switch>
-      </Suspense>
-    );
-  }
+        <Route path="/user-pages/login-1" component={Login} />
+        <Route path="/user-pages/register-1" component={Register1} />
+
+        <Route path="/profiles" component={Profiles} />
+
+      </Switch>
+    </Suspense>
+  );
 }
 
 export default AppRoutes;

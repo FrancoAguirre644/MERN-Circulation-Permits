@@ -4,11 +4,14 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import "./i18n";
 import * as serviceWorker from './serviceWorker';
+import { DataProvider } from './store/GlobalState'
 
 ReactDOM.render(
-  <BrowserRouter basename="/demo/corona-react-free/template/demo_1/preview">
-    <App />
-  </BrowserRouter>
-, document.getElementById('root'));
+  <DataProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </DataProvider>
+  , document.getElementById('root'));
 
 serviceWorker.unregister();

@@ -12,9 +12,12 @@ const profileController = {
 
             await newProfile.save()
 
-            res.status(201).json({ msg: "Profile created successfully." })
+            res.status(201).json({ 
+                msg: "Profile created successfully.",
+                newProfile
+            })
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ err: err.message })
         }
     },
     updateProfile: async (req, res) => {
@@ -22,11 +25,14 @@ const profileController = {
 
             const { name } = req.body
 
-            await Profiles.findOneAndUpdate({ _id: req.params.id }, { name })
+            const newProfile = await Profiles.findOneAndUpdate({ _id: req.params.id }, { name }, {new: true})
 
-            res.status(200).json({ msg: 'Profile updated successfully.' })
+            res.status(200).json({ 
+                msg: 'Profile updated successfully.',
+                profile: newProfile._doc,
+            })
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ err: err.message })
         }
     },
     deleteProfile: async (req, res) => {
@@ -36,7 +42,7 @@ const profileController = {
 
             res.status(200).json({ msg: 'Profile deleted successfully.' })
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ err: err.message })
         }
     },
     getProfile: async (req, res) => {
@@ -46,7 +52,7 @@ const profileController = {
 
             res.status(200).json(profile)
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ err: err.message })
         }
     },
     getAllProfiles: async (req, res) => {
@@ -56,7 +62,7 @@ const profileController = {
 
             res.status(200).json({ profiles })
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ err: err.message })
         }
     }
 }
