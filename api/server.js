@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const authRouter = require('./routes/authRouter')
 const profileRouter = require('./routes/profileRouter')
+const userRouter = require('./routes/userRouter')
 
 const app = express()
 app.use(express.json())
@@ -12,6 +13,7 @@ app.use(cors())
 // Routes
 
 app.use('/users', authRouter)
+app.use('/api/v1/users', userRouter)
 app.use('/api/v1/profiles', profileRouter)
 
 // Listen Server
