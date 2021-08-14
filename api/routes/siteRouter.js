@@ -1,0 +1,15 @@
+const router = require('express').Router()
+const siteController = require('../controllers/siteController')
+const auth = require('../middlewares/auth')
+
+router.route('/')
+    .get(auth, siteController.getAllSites)
+    .post(auth, siteController.createSite)
+
+router.route('/:id')
+    .get(auth, siteController.getSite)
+    .put(auth, siteController.updateSite)
+    .delete(auth, siteController.deleteSite)
+
+
+module.exports = router

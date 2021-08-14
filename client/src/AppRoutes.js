@@ -6,7 +6,6 @@ import Users from './components/user/Index'
 import EditUser from './components/user/Edit'
 import CreateUser from './components/user/Create'
 
-
 import Spinner from './shared/Spinner';
 
 const Buttons = lazy(() => import('./basic-ui/Buttons'));
@@ -40,8 +39,8 @@ const AppRoutes = () => {
 
         <Route path="/icons/mdi" component={Mdi} />
 
-        <Route path="/user-pages/login-1" component={Login} />
-        <Route path="/user-pages/register-1" component={Register1} />
+        <Route path="/user-pages/login-1" component={Login} exact />
+        <Route path="/user-pages/register-1" component={Register1} exact />
 
         <Route path="/profiles" component={Profiles} />
 

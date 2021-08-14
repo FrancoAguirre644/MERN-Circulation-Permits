@@ -59,7 +59,7 @@ const userController = {
     getUser: async (req, res) => {
         try {
 
-            const user = await Users.find({ _id: req.params.id })
+            const user = await Users.findOne({ _id: req.params.id })
 
             res.status(200).json(user)
         } catch (err) {

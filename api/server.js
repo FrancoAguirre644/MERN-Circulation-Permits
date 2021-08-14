@@ -5,6 +5,7 @@ const cors = require('cors')
 const authRouter = require('./routes/authRouter')
 const profileRouter = require('./routes/profileRouter')
 const userRouter = require('./routes/userRouter')
+const siteRouter = require('./routes/siteRouter')
 
 const app = express()
 app.use(express.json())
@@ -15,6 +16,7 @@ app.use(cors())
 app.use('/users', authRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/profiles', profileRouter)
+app.use('/api/v1/sites', siteRouter)
 
 // Listen Server
 

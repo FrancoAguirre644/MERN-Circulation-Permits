@@ -48,7 +48,7 @@ const profileController = {
     getProfile: async (req, res) => {
         try {
 
-            const profile = await Profiles.find({ _id: req.params.id })
+            const profile = await Profiles.findOne({ _id: req.params.id })
 
             res.status(200).json(profile)
         } catch (err) {
