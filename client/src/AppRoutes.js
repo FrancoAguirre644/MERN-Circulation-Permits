@@ -2,6 +2,10 @@ import React, { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Profiles from './components/profile/Index'
+import Users from './components/user/Index'
+import EditUser from './components/user/Edit'
+import CreateUser from './components/user/Create'
+
 
 import Spinner from './shared/Spinner';
 
@@ -12,6 +16,8 @@ const Typography = lazy(() => import('./basic-ui/Typography'));
 const BasicTable = lazy(() => import('./tables/BasicTable'));
 
 const Mdi = lazy(() => import('./icons/Mdi'));
+
+const Form = lazy(() => import('./form-elements/BasicElements'));
 
 const Login = lazy(() => import('./user-pages/Login'));
 const Register1 = lazy(() => import('./user-pages/Register'));
@@ -26,6 +32,9 @@ const AppRoutes = () => {
         <Route path="/basic-ui/buttons" component={Buttons} />
         <Route path="/basic-ui/dropdowns" component={Dropdowns} />
         <Route path="/basic-ui/typography" component={Typography} />
+        <Route path="/basic-ui/typography" component={Typography} />
+
+        <Route path="/form-elements/basic-elements" component={Form} />
 
         <Route path="/tables/basic-table" component={BasicTable} />
 
@@ -35,6 +44,10 @@ const AppRoutes = () => {
         <Route path="/user-pages/register-1" component={Register1} />
 
         <Route path="/profiles" component={Profiles} />
+
+        <Route path="/users" component={Users} exact />
+        <Route path="/users/create" component={CreateUser} exact />
+        <Route path="/users/:id" component={EditUser} exact />
 
       </Switch>
     </Suspense>

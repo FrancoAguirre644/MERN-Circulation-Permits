@@ -7,7 +7,7 @@ const userController = {
             const { username, email, password, profile } = req.body;
 
             const user = await Users.findOne({ email: email })
-            if (user) return res.status(400).json({ msg: "The user already exists." })
+            if (user) return res.status(400).json({ err: "The user already exists." })
 
             const passwordHash = await bcrypt.hash(password, 10)
 
@@ -40,7 +40,7 @@ const userController = {
 
             res.status(200).json({ 
                 msg: 'User updated successfully.',
-                profile: newUser._doc,
+                user: newUser._doc,
             })
         } catch (err) {
             return res.status(500).json({ err: err.message })

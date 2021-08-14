@@ -6,7 +6,7 @@ export const DataContext = createContext()
 
 export const DataProvider = ({ children }) => {
 
-    const initialState = { notify: {}, auth: {}, users: [], profiles: [] }
+    const initialState = { notify: {}, auth: {}, modal: [{ show: false }], users: [], profiles: [] }
 
     const [state, dispatch] = useReducer(reducers, initialState)
 
@@ -34,6 +34,16 @@ export const DataProvider = ({ children }) => {
             dispatch({
                 type: "ADD_PROFILES",
                 payload: res.profiles
+            })
+
+        })
+
+        getData('users').then(res => {
+            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+            dispatch({
+                type: "ADD_USERS",
+                payload: res.users
             })
 
         })

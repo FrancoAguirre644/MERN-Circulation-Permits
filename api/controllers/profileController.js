@@ -6,7 +6,7 @@ const profileController = {
             const { name } = req.body;
 
             const profile = await Profiles.findOne({ name: name })
-            if (profile) return res.status(400).json({ msg: "The profile already exists." })
+            if (profile) return res.status(400).json({ err: "The profile already exists." })
 
             const newProfile = new Profiles({ name })
 

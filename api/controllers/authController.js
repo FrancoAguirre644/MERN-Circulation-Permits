@@ -8,7 +8,7 @@ const authController = {
             const { username, email, password } = req.body;
 
             const user = await Users.findOne({ email: email })
-            if (user) return res.status(400).json({ msg: "The email already exists." })
+            if (user) return res.status(400).json({ err: "The email already exists." })
 
             const passwordHash = await bcrypt.hash(password, 10)
 
@@ -22,7 +22,7 @@ const authController = {
 
             res.json({ msg: "Sign up success!" })
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ err: err.message })
         }
     },
     loginUser: async (req, res) => {
@@ -40,7 +40,7 @@ const authController = {
 
             const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "4d" })
 
-            res.json({
+            res.status(200).json({
                 msg: "Login Success!",
                 user: {
                     username: user.username,
@@ -48,7 +48,7 @@ const authController = {
                 token
             })
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ err: err.message })
         }
     },
 }

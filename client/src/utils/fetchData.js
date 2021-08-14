@@ -49,7 +49,7 @@ export const patchData = async (url, post, token) => {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+                Authorization: `${localStorage.getItem('jwt')}`,
         },
         body: JSON.stringify(post)
     })
@@ -64,7 +64,7 @@ export const deleteData = async (url, token) => {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+                Authorization: `${localStorage.getItem('jwt')}`,
         },
     })
 

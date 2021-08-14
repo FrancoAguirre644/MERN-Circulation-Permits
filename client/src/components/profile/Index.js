@@ -26,19 +26,19 @@ const Index = () => {
             res = await putData(`profiles/${id}`, { name })
 
             if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-            
-            dispatch(updateItem(profiles, id, res.profile, 'ADD_PROFILES')) 
+
+            dispatch(updateItem(profiles, id, res.profile, 'ADD_PROFILES'))
 
         } else {
             res = await postData('profiles', { name })
 
-            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } }) 
-            dispatch({ type: "ADD_PROFILES", payload: [...profiles, res.newProfile] }) 
-        } 
-        
+            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+            dispatch({ type: "ADD_PROFILES", payload: [...profiles, res.newProfile] })
+        }
+
         setId('')
         setName('')
-        return dispatch({ type: 'NOTIFY', payload: { success: res.msg } }) 
+        return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
     }
 
     const handleEditProfile = (profile) => {
@@ -60,8 +60,8 @@ const Index = () => {
                                 placeholder="Add new Category" value={name}
                                 onChange={(e) => setName(e.target.value)} />
                         </div>
-                        <button type="button" class="btn btn-outline-info mr-2" onClick={createProfile}>{id ? "Update" : "Create"}</button>
-                        <button type="button" class="btn btn-outline-success btn-icon-text">Print<i class="mdi mdi-printer btn-icon-append"></i></button>
+                        <button type="button" className="btn btn-outline-info mr-2" onClick={createProfile}>{id ? "Update" : "Create"}</button>
+                        <button type="button" className="btn btn-outline-success btn-icon-text">Print<i className="mdi mdi-printer btn-icon-append"></i></button>
                     </div>
 
                     <div className="table-responsive">
@@ -78,7 +78,12 @@ const Index = () => {
                                                 </i>
                                             </td>
                                             <td>
-                                                <i className="mdi mdi-delete" style={{ cursor: 'pointer' }}>
+                                                <i className="mdi mdi-delete" style={{ cursor: 'pointer' }}
+                                                    data-toggle="modal" data-target="#exampleModal"
+                                                    onClick={() => dispatch({
+                                                        type: 'ADD_MODAL',
+                                                        payload: [{ data: profiles, id: profile._id, title: profile.name, type: 'ADD_PROFILES', show: true }]
+                                                    })}>
                                                 </i>
                                             </td>
                                         </tr>
@@ -86,27 +91,7 @@ const Index = () => {
                                 }
                             </tbody>
                         </table>
-                    </div> {/*
-                    <div key={profile._id} className="card text-capitalize">
-                        <div className="card-body d-flex justify-content-between ">
-                            {profile.name}
-
-                            <div style={{ cursor: 'pointer' }}>
-                                <i className="fas fa-edit mr-2 text-info"
-                                    onClick={() => handleEditProfile(profile)}></i>
-
-                                <i className="fas fa-trash-alt mr-2 text-danger"
-                                    data-toggle="modal" data-target="#exampleModal"
-                                ></i>
-                            </div>
-
-                        </div>
-
-                        <hr />
-
-                        
-                    </div> */}
-
+                    </div>
                 </div>
             </div>
         </div>
