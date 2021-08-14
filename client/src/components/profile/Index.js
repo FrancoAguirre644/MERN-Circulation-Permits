@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { postData, putData } from '../../utils/fetchData';
+import { generatePDFProfile } from '../../services/ReportGeneratorProfile'
 
 const Index = () => {
 
@@ -60,8 +61,13 @@ const Index = () => {
                                 placeholder="Add new Category" value={name}
                                 onChange={(e) => setName(e.target.value)} />
                         </div>
-                        <button type="button" className="btn btn-outline-info mr-2" onClick={createProfile}>{id ? "Update" : "Create"}</button>
-                        <button type="button" className="btn btn-outline-success btn-icon-text">Print<i className="mdi mdi-printer btn-icon-append"></i></button>
+                        <button type="button" className="btn btn-outline-info mr-2"
+                            onClick={createProfile}>{id ? "Update" : "Create"}
+                        </button>
+                        <button type="button" className="btn btn-outline-success btn-icon-text"
+                            onClick={() => generatePDFProfile(profiles)}>
+                            Print<i className="mdi mdi-printer btn-icon-append"></i>
+                        </button>
                     </div>
 
                     <div className="table-responsive">

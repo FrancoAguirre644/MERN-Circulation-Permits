@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState'
 import { Link } from 'react-router-dom'
+import { generatePDFUser } from '../../services/ReportGeneratorUser'
 
 const Index = () => {
 
@@ -14,13 +15,13 @@ const Index = () => {
             <div className="card">
                 <div className="card-body">
                     <h4 className="card-title">
-                        Users <Link to="users/create">
-                            <button type="button" className="btn btn-outline-success btn-icon-text ml-1" 
-                                style={{ float: 'right' }}>Print
-                                <i className="mdi mdi-printer btn-icon-append"></i>
-                            </button>
-                            <button type="button" className="btn btn-outline-info btn-icon-text"
-                                style={{ float: 'right' }}>
+                        Users 
+                        <button type="button" className="btn btn-outline-success btn-icon-text ml-1 float-right"
+                            onClick={() => generatePDFUser(users)}>Print
+                            <i className="mdi mdi-printer btn-icon-append"></i>
+                        </button>
+                        <Link to="users/create">
+                            <button type="button" className="btn btn-outline-info btn-icon-text float-right">
                                 Create <i className="mdi mdi-account-plus btn-icon-append"></i>
                             </button>
                         </Link>
