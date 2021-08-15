@@ -30,7 +30,7 @@ const siteController = {
 
             res.status(200).json({
                 msg: 'Site updated successfully.',
-                profile: newSite._doc,
+                site: newSite._doc,
             })
         } catch (err) {
             return res.status(500).json({ err: err.message })

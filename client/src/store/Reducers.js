@@ -27,6 +27,11 @@ const reducers = (state, action) => {
                 ...state,
                 profiles: action.payload
             }
+        case ACTIONS.ADD_SITES:
+            return {
+                ...state,
+                sites: action.payload
+            }
         default:
             return state
     }

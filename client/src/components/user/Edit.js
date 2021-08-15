@@ -49,7 +49,7 @@ const Edit = ({ match }) => {
                                 <div className="col-md-6">
                                     <Form.Group>
                                         <label htmlFor="exampleInputUsername1">Username</label>
-                                        <Form.Control type="text" id="exampleInputUsername1"
+                                        <Form.Control type="text" id="exampleInputUsername1" name="username"
                                             placeholder="Username" value={user.username}
                                             onChange={handleChangeInput}
                                         />
@@ -72,7 +72,7 @@ const Edit = ({ match }) => {
                             </div>
                             <Form.Group>
                                 <label htmlFor="exampleInputEmail1">Email address</label>
-                                <Form.Control type="email" className="form-control" id="exampleInputEmail1"
+                                <Form.Control type="email" className="form-control" id="exampleInputEmail1" name="email"
                                     placeholder="Email" value={user.email}
                                     onChange={handleChangeInput}
                                 />

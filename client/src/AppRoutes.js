@@ -2,9 +2,15 @@ import React, { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Profiles from './components/profile/Index'
+
 import Users from './components/user/Index'
-import EditUser from './components/user/Edit'
 import CreateUser from './components/user/Create'
+import EditUser from './components/user/Edit'
+
+import Sites from './components/site/Index'
+import CreateSide from './components/site/Create'
+import EditSide from './components/site/Edit'
+
 
 import Spinner from './shared/Spinner';
 
@@ -47,6 +53,10 @@ const AppRoutes = () => {
         <Route path="/users" component={Users} exact />
         <Route path="/users/create" component={CreateUser} exact />
         <Route path="/users/:id" component={EditUser} exact />
+
+        <Route path="/sites" component={Sites} exact />
+        <Route path="/sites/create" component={CreateSide} exact />
+        <Route path="/sites/:id" component={EditSide} exact />
 
       </Switch>
     </Suspense>
