@@ -1,22 +1,19 @@
 const moongose = require('mongoose')
 
-const userSchema = new moongose.Schema({
-    username: {
+const vehicleSchema = new moongose.Schema({
+    patent: {
         type: String,
         required: true,
-        trim: true
     },
-    email: {
+    brand: {
         type: String,
         required: true,
-        unique: true
     },
-    profile: {
+    model: {
         type: String,
-        required: true,
         default: 'user'
     },
-    password: {
+    year: {
         type: String,
         required: true
     }
@@ -24,4 +21,4 @@ const userSchema = new moongose.Schema({
     timestamps: true
 })
 
-module.exports = moongose.model('Users', userSchema)
+module.exports = moongose.model('Vehicles', vehicleSchema)

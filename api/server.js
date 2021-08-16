@@ -7,6 +7,7 @@ const profileRouter = require('./routes/profileRouter')
 const userRouter = require('./routes/userRouter')
 const siteRouter = require('./routes/siteRouter')
 const personRouter = require('./routes/personRouter')
+const vehicleRouter = require('./routes/vehicleRouter')
 
 const app = express()
 app.use(express.json())
@@ -19,6 +20,7 @@ app.use('/api/v1/users', userRouter)
 app.use('/api/v1/profiles', profileRouter)
 app.use('/api/v1/sites', siteRouter)
 app.use('/api/v1/persons', personRouter)
+app.use('/api/v1/vehicles', vehicleRouter)
 
 // Listen Server
 
