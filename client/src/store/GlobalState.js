@@ -8,7 +8,8 @@ export const DataProvider = ({ children }) => {
 
     const initialState = {
         notify: {}, auth: {}, modal: [{ show: false }],
-        users: [], profiles: [], sites: [], persons: []
+        users: [], profiles: [], sites: [], persons: [],
+        vehicles: []
     }
 
     const [state, dispatch] = useReducer(reducers, initialState)
@@ -67,6 +68,16 @@ export const DataProvider = ({ children }) => {
             dispatch({
                 type: "ADD_PERSONS",
                 payload: res.persons
+            })
+
+        })
+
+        getData('vehicles').then(res => {
+            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+            dispatch({
+                type: "ADD_VEHICLES",
+                payload: res.vehicles
             })
 
         })

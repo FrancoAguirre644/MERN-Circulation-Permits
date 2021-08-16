@@ -59,6 +59,18 @@ const ModalCustom = () => {
             }) 
     }
 
+    const deleteVehicle = async (item) => {
+        
+        await deleteData(`vehicles/${item.id}`)
+            .then(res => {
+                if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+                dispatch(deleteItem(item.data, item.id, item.type))
+
+                return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
+            }) 
+    }
+
     const handleSubmit = () => {
 
         if (modal.length !== 0) {
@@ -72,6 +84,8 @@ const ModalCustom = () => {
                 if (item.type === 'ADD_SITES') deleteSite(item)
 
                 if (item.type === 'ADD_PERSONS') deletePerson(item)
+
+                if (item.type === 'ADD_VEHICLES') deleteVehicle(item)
 
                 dispatch({ type: 'ADD_MODAL', payload: [{ show: false }] })
 

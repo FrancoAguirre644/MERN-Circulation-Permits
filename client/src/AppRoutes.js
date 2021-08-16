@@ -15,6 +15,10 @@ import Persons from './components/person/Index'
 import CreatePerson from './components/person/Create'
 import EditPerson from './components/person/Edit'
 
+import Vehicles from './components/vehicle/Index'
+import CreateVehicle from './components/vehicle/Create'
+import EditVehicle from './components/vehicle/Edit'
+
 import Spinner from './ui/shared/Spinner';
 
 const Buttons = lazy(() => import('./ui/basic-ui/Buttons'));
@@ -64,6 +68,10 @@ const AppRoutes = () => {
         <Route path="/persons" component={Persons} exact />
         <Route path="/persons/create" component={CreatePerson} exact />
         <Route path="/persons/:id" component={EditPerson} exact />
+
+        <Route path="/vehicles" component={Vehicles} exact />
+        <Route path="/vehicles/create" component={CreateVehicle} exact />
+        <Route path="/vehicles/:id" component={EditVehicle} exact />
 
       </Switch>
     </Suspense>

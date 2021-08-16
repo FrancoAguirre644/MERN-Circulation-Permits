@@ -8,6 +8,7 @@ export const ACTIONS = {
     ADD_PROFILES: 'ADD_PROFILES',
     ADD_SITES: 'ADD_SITES',
     ADD_PERSONS: 'ADD_PERSONS',
+    ADD_VEHICLES: 'ADD_VEHICLES',
 }
 
 export const addToCart = (product, cart) => {

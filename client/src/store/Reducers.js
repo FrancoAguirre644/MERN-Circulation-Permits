@@ -37,6 +37,11 @@ const reducers = (state, action) => {
                 ...state,
                 persons: action.payload
             }
+        case ACTIONS.ADD_VEHICLES:
+            return {
+                ...state,
+                vehicles: action.payload
+            }
         default:
             return state
     }
