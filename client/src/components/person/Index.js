@@ -15,9 +15,6 @@ const Index = () => {
                 <div className="card-body">
                     <h4 className="card-title">
                         Persons 
-                        <button type="button" className="btn btn-outline-success btn-icon-text ml-1 float-right">Print
-                            <i className="mdi mdi-printer btn-icon-append"></i>
-                        </button>
                         <Link to="persons/create">
                             <button type="button" className="btn btn-outline-info btn-icon-text float-right">
                                 Create <i className="mdi mdi-account-plus btn-icon-append"></i>

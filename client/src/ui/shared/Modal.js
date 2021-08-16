@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap'
-import { deleteItem } from '../store/Actions';
-import { DataContext } from '../store/GlobalState';
-import { deleteData } from '../utils/fetchData';
+import { deleteItem } from '../../store/Actions';
+import { DataContext } from '../../store/GlobalState';
+import { deleteData } from '../../utils/fetchData';
 
 const ModalCustom = () => {
 

@@ -15,20 +15,20 @@ import Persons from './components/person/Index'
 import CreatePerson from './components/person/Create'
 import EditPerson from './components/person/Edit'
 
-import Spinner from './shared/Spinner';
+import Spinner from './ui/shared/Spinner';
 
-const Buttons = lazy(() => import('./basic-ui/Buttons'));
-const Dropdowns = lazy(() => import('./basic-ui/Dropdowns'));
-const Typography = lazy(() => import('./basic-ui/Typography'));
+const Buttons = lazy(() => import('./ui/basic-ui/Buttons'));
+const Dropdowns = lazy(() => import('./ui/basic-ui/Dropdowns'));
+const Typography = lazy(() => import('./ui/basic-ui/Typography'));
 
-const BasicTable = lazy(() => import('./tables/BasicTable'));
+const BasicTable = lazy(() => import('./ui/tables/BasicTable'));
 
-const Mdi = lazy(() => import('./icons/Mdi'));
+const Mdi = lazy(() => import('./ui/icons/Mdi'));
 
-const Form = lazy(() => import('./form-elements/BasicElements'));
+const Form = lazy(() => import('./ui/form-elements/BasicElements'));
 
-const Login = lazy(() => import('./user-pages/Login'));
-const Register1 = lazy(() => import('./user-pages/Register'));
+const Login = lazy(() => import('./ui/user-pages/Login'));
+const Register1 = lazy(() => import('./ui/user-pages/Register'));
 
 
 const AppRoutes = () => {

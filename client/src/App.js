@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.scss';
 import AppRoutes from './AppRoutes';
-import Navbar from './shared/Navbar';
-import Sidebar from './shared/Sidebar';
-import Footer from './shared/Footer';
-import Notify from './shared/Notify';
-import ModalCustom from './shared/Modal';
+import Navbar from './ui/shared/Navbar';
+import Sidebar from './ui/shared/Sidebar';
+import Footer from './ui/shared/Footer';
+import Notify from './ui/shared/Notify';
+import ModalCustom from './ui/shared/Modal';
 
 class App extends Component {
   state = {}

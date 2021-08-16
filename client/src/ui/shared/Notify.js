@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import {DataContext} from '../store/GlobalState'
+import {DataContext} from '../../store/GlobalState'
 import Toast from './Toast'
 
 const Notify = () => {
