@@ -47,6 +47,18 @@ const ModalCustom = () => {
             }) 
     }
 
+    const deletePerson = async (item) => {
+        
+        await deleteData(`persons/${item.id}`)
+            .then(res => {
+                if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+                dispatch(deleteItem(item.data, item.id, item.type))
+
+                return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
+            }) 
+    }
+
     const handleSubmit = () => {
 
         if (modal.length !== 0) {
@@ -59,6 +71,8 @@ const ModalCustom = () => {
 
                 if (item.type === 'ADD_SITES') deleteSite(item)
 
+                if (item.type === 'ADD_PERSONS') deletePerson(item)
+
                 dispatch({ type: 'ADD_MODAL', payload: [{ show: false }] })
 
             }
@@ -68,7 +82,7 @@ const ModalCustom = () => {
     }
 
     return (
-        <Modal show={modal[0].show} onHide={handleClose}>
+        <Modal show={modal[0].show} onHide={handleClose} backdrop="static">
             <Modal.Header closeButton>
                 <Modal.Title>{modal.length !== 0 && modal[0].title}</Modal.Title>
             </Modal.Header>

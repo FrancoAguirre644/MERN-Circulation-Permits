@@ -11,6 +11,9 @@ import Sites from './components/site/Index'
 import CreateSide from './components/site/Create'
 import EditSide from './components/site/Edit'
 
+import Persons from './components/person/Index'
+import CreatePerson from './components/person/Create'
+import EditPerson from './components/person/Edit'
 
 import Spinner from './shared/Spinner';
 
@@ -57,6 +60,10 @@ const AppRoutes = () => {
         <Route path="/sites" component={Sites} exact />
         <Route path="/sites/create" component={CreateSide} exact />
         <Route path="/sites/:id" component={EditSide} exact />
+
+        <Route path="/persons" component={Persons} exact />
+        <Route path="/persons/create" component={CreatePerson} exact />
+        <Route path="/persons/:id" component={EditPerson} exact />
 
       </Switch>
     </Suspense>
