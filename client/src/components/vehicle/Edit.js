@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { putData } from '../../utils/fetchData';
+import { validateVehicle } from '../../utils/valid'
 
 const Edit = ({ match }) => {
 
@@ -27,6 +28,10 @@ const Edit = ({ match }) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
+
+        const errorMsg = validateVehicle(vehicle.patent, vehicle.brand, vehicle.model, vehicle.year)
+
+        if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
         
         const res = await putData(`vehicles/${vehicle._id}`, vehicle)
         if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})

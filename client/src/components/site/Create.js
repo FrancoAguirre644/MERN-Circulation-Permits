@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { DataContext } from '../../store/GlobalState';
 import { postData } from '../../utils/fetchData';
+import { validateSite } from '../../utils/valid'
 
 const Create = () => {
 
@@ -24,6 +25,10 @@ const Create = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const errorMsg = validateSite(site.site, site.postalCode)
+
+        if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
         
         const res = await postData('sites', site)
         if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})

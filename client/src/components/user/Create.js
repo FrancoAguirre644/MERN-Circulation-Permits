@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { DataContext } from '../../store/GlobalState';
 import { postData } from '../../utils/fetchData';
+import { validateRegister } from '../../utils/valid'
 
 const Create = () => {
 
@@ -28,12 +29,16 @@ const Create = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const errorMsg = validateRegister(user.username, user.email, user.password, user.cf_password)
+
+        if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
+
         const res = await postData('users', user)
-        if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
+        if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
         dispatch({ type: "ADD_USERS", payload: [...users, res.newUser] })
 
-        dispatch({type: 'NOTIFY', payload: {success: res.msg}})
+        dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
 
         router.push('/users')
 

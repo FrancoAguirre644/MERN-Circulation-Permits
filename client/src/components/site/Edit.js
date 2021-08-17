@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { putData } from '../../utils/fetchData';
+import { validateSite } from '../../utils/valid'
 
 const Edit = ({ match }) => {
 
@@ -27,13 +28,17 @@ const Edit = ({ match }) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        
+
+        const errorMsg = validateSite(site.site, site.postalCode)
+
+        if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
+
         const res = await putData(`sites/${site._id}`, site)
-        if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
-        
+        if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
         dispatch(updateItem(sites, site._id, res.site, 'ADD_SITES'))
 
-        dispatch({type: 'NOTIFY', payload: {success: res.msg}})  
+        dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
 
         router.push('/sites')
     }

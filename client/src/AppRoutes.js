@@ -19,6 +19,10 @@ import Vehicles from './components/vehicle/Index'
 import CreateVehicle from './components/vehicle/Create'
 import EditVehicle from './components/vehicle/Edit'
 
+import Permits from './components/permits/Index'
+
+import Dashboard from './components/Dashboard'
+
 import Spinner from './ui/shared/Spinner';
 
 const Buttons = lazy(() => import('./ui/basic-ui/Buttons'));
@@ -52,10 +56,13 @@ const AppRoutes = () => {
 
         <Route path="/icons/mdi" component={Mdi} />
 
-        <Route path="/user-pages/login-1" component={Login} exact />
-        <Route path="/user-pages/register-1" component={Register1} exact />
+        <Route path="/login" component={Login} exact />
+        <Route path="/register" component={Register1} exact />
+
+        <Route path="/" component={Dashboard} exact />
 
         <Route path="/profiles" component={Profiles} />
+        
 
         <Route path="/users" component={Users} exact />
         <Route path="/users/create" component={CreateUser} exact />
@@ -72,6 +79,8 @@ const AppRoutes = () => {
         <Route path="/vehicles" component={Vehicles} exact />
         <Route path="/vehicles/create" component={CreateVehicle} exact />
         <Route path="/vehicles/:id" component={EditVehicle} exact />
+
+        <Route path="/permits" component={Permits} exact />
 
       </Switch>
     </Suspense>

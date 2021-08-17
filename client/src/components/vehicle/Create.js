@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { DataContext } from '../../store/GlobalState';
 import { postData } from '../../utils/fetchData';
+import { validateVehicle } from '../../utils/valid'
 
 const Create = () => {
 
@@ -26,6 +27,10 @@ const Create = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const errorMsg = validateVehicle(vehicle.patent, vehicle.brand, vehicle.model, vehicle.year)
+
+        if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
         
         const res = await postData('vehicles', vehicle)
         if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
