@@ -35,8 +35,8 @@ const Mdi = lazy(() => import('./ui/icons/Mdi'));
 
 const Form = lazy(() => import('./ui/form-elements/BasicElements'));
 
-const Login = lazy(() => import('./ui/user-pages/Login'));
-const Register1 = lazy(() => import('./ui/user-pages/Register'));
+const Login = lazy(() => import('./components/auth/Login'));
+const Register = lazy(() => import('./components/auth/Register'));
 
 
 const AppRoutes = () => {
@@ -57,7 +57,7 @@ const AppRoutes = () => {
         <Route path="/icons/mdi" component={Mdi} />
 
         <Route path="/login" component={Login} exact />
-        <Route path="/register" component={Register1} exact />
+        <Route path="/register" component={Register} exact />
 
         <Route path="/" component={Dashboard} exact />
 

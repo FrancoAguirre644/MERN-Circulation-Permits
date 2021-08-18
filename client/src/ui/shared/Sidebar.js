@@ -55,10 +55,8 @@ class Sidebar extends Component {
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <div className="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <Link to="/">
-            <a className="sidebar-brand brand-logo">
+          <Link to="/" className="sidebar-brand brand-logo">
               <img src='/assets/images/logo.svg' alt="logo" />
-            </a>
           </Link>
           <a className="sidebar-brand brand-logo-mini" href="index.html"><img src='/assets/images/logo-mini.svg' alt="logo" /></a>
         </div>
