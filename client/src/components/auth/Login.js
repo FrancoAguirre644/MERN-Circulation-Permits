@@ -36,6 +36,8 @@ const Login = () => {
       }
     })
 
+    localStorage.setItem('jwt', res.token)
+
     router.push("/")
 
   }

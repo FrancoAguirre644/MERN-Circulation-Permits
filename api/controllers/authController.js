@@ -51,6 +51,27 @@ const authController = {
             return res.status(500).json({ err: err.message })
         }
     },
+    verifiedToken: (req, res) => {
+        try {
+            const token = req.header("Authorization")
+            if (!token) return res.send(false)
+
+            jwt.verify(token, process.env.TOKEN_SECRET, async (err, verified) => {
+                if (err) return res.status(400).json({err: "token invalid"})
+
+                const user = await Users.findById(verified.id).populate("user", "-password")
+
+                if (!user) return res.status(400).json({err: "user not exists"})
+
+                return res.json({
+                    user
+                })
+            })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    }
 }
 
 module.exports = authController

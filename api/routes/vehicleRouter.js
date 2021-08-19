@@ -3,7 +3,7 @@ const vehicleController = require('../controllers/vehicleController')
 const auth = require('../middlewares/auth')
 
 router.route('/')
-    .get(auth, vehicleController.getAllVehicles)
+    .get(vehicleController.getAllVehicles)
     .post(auth, vehicleController.createVehicle)
 
 router.route('/:id')

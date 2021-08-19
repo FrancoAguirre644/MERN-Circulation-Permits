@@ -3,7 +3,7 @@ const personController = require('../controllers/personController')
 const auth = require('../middlewares/auth')
 
 router.route('/')
-    .get(auth, personController.getAllPersons)
+    .get(personController.getAllPersons)
     .post(auth, personController.createPerson)
 
 router.route('/:id')

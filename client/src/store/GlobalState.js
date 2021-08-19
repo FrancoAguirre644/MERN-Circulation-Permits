@@ -15,44 +15,47 @@ export const DataProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducers, initialState)
 
     useEffect(() => {
-        /*
-        const firstLogin = localStorage.getItem('firstLogin');
-        if (firstLogin) {
-            getData('auth/accessToken').then(res => {
-                if (res.err) return localStorage.removeItem('firstLogin')
+
+        const token = localStorage.getItem('jwt');
+
+        if (token) {
+
+            getData('auth/verify').then(res => {
+                if (res.err) return localStorage.removeItem('jwt')
 
                 dispatch({
                     type: "AUTH",
                     payload: {
-                        token: res.access_token,
+                        token: token,
                         user: res.user
                     }
                 })
-
-            })
-        } */
-
-        getData('profiles').then(res => {
-            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-
-            dispatch({
-                type: "ADD_PROFILES",
-                payload: res.profiles
             })
 
-        })
-
-        getData('users').then(res => {
-            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-
-            dispatch({
-                type: "ADD_USERS",
-                payload: res.users
-            })
-
-        })
+        }
+        /*
+                getData('profiles').then(res => {
+                    if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+        
+                    dispatch({
+                        type: "ADD_PROFILES",
+                        payload: res.profiles
+                    })
+        
+                })
+        
+                getData('users').then(res => {
+                    if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+        
+                    dispatch({
+                        type: "ADD_USERS",
+                        payload: res.users
+                    })
+        
+                }) */
 
         getData('sites').then(res => {
+
             if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
             dispatch({
@@ -63,6 +66,7 @@ export const DataProvider = ({ children }) => {
         })
 
         getData('persons').then(res => {
+
             if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
             dispatch({
@@ -73,6 +77,7 @@ export const DataProvider = ({ children }) => {
         })
 
         getData('vehicles').then(res => {
+
             if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
             dispatch({

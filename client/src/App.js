@@ -4,10 +4,8 @@ import AppRoutes from './AppRoutes';
 import { withRouter } from 'react-router-dom';
 import Navbar from './ui/shared/Navbar';
 import Sidebar from './ui/shared/Sidebar';
-import Footer from './ui/shared/Footer';
 import Notify from './ui/shared/Notify';
 import ModalCustom from './ui/shared/Modal';
-
 
 class App extends Component {
   state = {}
@@ -17,7 +15,6 @@ class App extends Component {
   render() {
     let navbarComponent = !this.state.isFullPageLayout ? <Navbar /> : '';
     let sidebarComponent = !this.state.isFullPageLayout ? <Sidebar /> : '';
-    let footerComponent = !this.state.isFullPageLayout ? <Footer /> : '';
     let notifyComponent = !this.state.isFullPageLayout ? <Notify /> : '';
     let modalComponent = !this.state.isFullPageLayout ? <ModalCustom /> : '';
 
@@ -32,7 +29,6 @@ class App extends Component {
               {notifyComponent}
               {modalComponent}
             </div>
-            {footerComponent}
           </div>
         </div>
       </div>

@@ -21,8 +21,6 @@ import EditVehicle from './components/vehicle/Edit'
 
 import Permits from './components/permits/Index'
 
-import Dashboard from './components/Dashboard'
-
 import Spinner from './ui/shared/Spinner';
 
 const Buttons = lazy(() => import('./ui/basic-ui/Buttons'));
@@ -37,6 +35,8 @@ const Form = lazy(() => import('./ui/form-elements/BasicElements'));
 
 const Login = lazy(() => import('./components/auth/Login'));
 const Register = lazy(() => import('./components/auth/Register'));
+
+const Dashboard = lazy(() => import('./components/Dashboard'));
 
 
 const AppRoutes = () => {
@@ -63,7 +63,6 @@ const AppRoutes = () => {
 
         <Route path="/profiles" component={Profiles} />
         
-
         <Route path="/users" component={Users} exact />
         <Route path="/users/create" component={CreateUser} exact />
         <Route path="/users/:id" component={EditUser} exact />
