@@ -67,6 +67,14 @@ export const validateVehicle = (patent, brand, model, year) => {
 
 }
 
+export const validateDailyPermit = (personId, fromSiteId, toSiteId, reason) => {
+
+    if (!personId || !fromSiteId || !toSiteId || !reason) {
+        return 'Please add all fields.'
+    }
+
+}
+
 function validateEmail(email) {
     const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return reg.test(email);

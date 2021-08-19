@@ -9,6 +9,7 @@ export const ACTIONS = {
     ADD_SITES: 'ADD_SITES',
     ADD_PERSONS: 'ADD_PERSONS',
     ADD_VEHICLES: 'ADD_VEHICLES',
+    ADD_DAILYPERMITS: 'ADD_DAILYPERMITS'
 }
 
 export const addToCart = (product, cart) => {

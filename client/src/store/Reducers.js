@@ -42,6 +42,11 @@ const reducers = (state, action) => {
                 ...state,
                 vehicles: action.payload
             }
+        case ACTIONS.ADD_DAILYPERMITS:
+            return {
+                ...state,
+                dailyPermits: action.payload
+            }
         default:
             return state
     }

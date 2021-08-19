@@ -131,8 +131,8 @@ const Sidebar = () => {
             <span className="menu-title"><Trans>Vehicles</Trans></span>
           </Link>
         </li>
-        <li className={isPathActive('/vehicles') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
-          <Link className="nav-link" to="/vehicles">
+        <li className={isPathActive('/reports') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
+          <Link className="nav-link" to="/reports">
             <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
             <span className="menu-title"><Trans>Reports</Trans></span>
           </Link>

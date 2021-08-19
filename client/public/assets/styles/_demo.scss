@@ -160,3 +160,7 @@
     }
   }
 }
+
+input[type="text"]:disabled {
+  background: #000000;
+}

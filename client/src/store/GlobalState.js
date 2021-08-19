@@ -9,7 +9,7 @@ export const DataProvider = ({ children }) => {
     const initialState = {
         notify: {}, auth: {}, modal: [{ show: false }],
         users: [], profiles: [], sites: [], persons: [],
-        vehicles: []
+        vehicles: [], dailyPermits: []
     }
 
     const [state, dispatch] = useReducer(reducers, initialState)
@@ -85,45 +85,20 @@ export const DataProvider = ({ children }) => {
                 payload: res.vehicles
             })
 
+        }) 
+
+        getData('dailyPermits').then(res => {
+
+            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+            dispatch({
+                type: "ADD_DAILYPERMITS",
+                payload: res.dailyPermits
+            })
+
         })
 
     }, [])
-
-    /*
-    useEffect(() => {
-        const __next__cart01 = JSON.parse(localStorage.getItem('__next__cart01'))
-
-        if (__next__cart01) dispatch({ type: 'ADD_CART', payload: __next__cart01 })
-    }, [])
-
-    useEffect(() => {
-        localStorage.setItem('__next__cart01', JSON.stringify(cart))
-    }, [cart])
-
-    useEffect(() => {
-        if (auth.token) {
-
-            getData('order', auth.token)
-                .then(res => {
-                    if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-
-                    dispatch({ type: 'ADD_ORDERS', payload: res.orders })
-                })
-
-            if (auth.user.role === 'admin') {
-                getData('user', auth.token)
-                    .then(res => {
-                        if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-
-                        dispatch({ type: 'ADD_USERS', payload: res.users })
-                    })
-            }
-
-        } else {
-            dispatch({ type: 'ADD_ORDERS', payload: [] })
-            dispatch({ type: 'ADD_USERS', payload: [] })
-        }
-    }, [auth.token]) */
 
     return (
         <DataContext.Provider value={{ state, dispatch }}>

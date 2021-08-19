@@ -64,7 +64,7 @@ const Create = () => {
                             <Form.Group>
                                 <label>Document</label>
                                 <Form.Control type="text" name="document" value={person.document}
-                                    pattern="[a-zA-Z]*"placeholder="Document" 
+                                    placeholder="Document" 
                                     onChange={handleChangeInput} />
                             </Form.Group>
                             <button type="submit" className="btn btn-primary mr-2 py-2 w-100">Create</button>
