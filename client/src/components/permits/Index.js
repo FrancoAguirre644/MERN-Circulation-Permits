@@ -16,6 +16,7 @@ const Index = () => {
                             <label>
                                 Select what type of permission you want to generate:
                             </label>
+                            <hr/>
                             <select className="form-control" onChange={(e) => setChosePermit(e.target.value)}>
                             <option value="Daily" selected disabled>Select type of permission</option>
                                 <option value="Daily">Daily Permit</option>

@@ -1,4 +1,5 @@
 const TableReport = (dailyPermits) => {
+
     return (
         <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
@@ -15,18 +16,19 @@ const TableReport = (dailyPermits) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/*
+                                {
                                     dailyPermits.map(dailyPermit => (
                                         <tr key={dailyPermit._id}>
-                                            <td className="py-1">
-                                                <img src={"/assets/images/faces/face1.jpg"} alt="user icon" />
+                                            <td> {new Date(dailyPermit.date).toLocaleDateString()} </td>
+                                            <td className="text-capitalize">
+                                                {dailyPermit.person.firstName + " " +
+                                                    dailyPermit.person.lastName}
                                             </td>
-                                            <td> {new Date(dailyPermit.createdAt).toLocaleDateString()} </td>
-                                            <td className="text-capitalize"> {dailyPermit.person} </td>
-                                            <td> {dailyPermit.from} </td>
+                                            <td> {dailyPermit.from.site} </td>
+                                            <td> {dailyPermit.to.site} </td>
                                             <td className="text-capitalize"> {dailyPermit.reason} </td>
                                         </tr>
-                                    ))*/
+                                    ))
                                 }
                             </tbody>
                         </table>

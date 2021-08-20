@@ -22,7 +22,9 @@ import EditVehicle from './components/vehicle/Edit'
 import Permits from './components/permits/Index'
 
 import Reports from './components/reports/Index'
-import ReportForPersons from './components/reports/ReportForPersons'
+import ReportFromPersons from './components/reports/ReportFromPersons'
+import ReportBetweenDates from './components/reports/ReportBetweenDates'
+import ReportBetweenDatesAndSites from './components/reports/ReportBetweenDatesAndSites'
 
 import Spinner from './ui/shared/Spinner';
 
@@ -85,7 +87,9 @@ const AppRoutes = () => {
         <Route path="/permits" component={Permits} exact />
 
         <Route path="/reports" component={Reports} exact />
-        <Route path="/reports/for/persons" component={ReportForPersons} exact />
+        <Route path="/reports/from/persons" component={ReportFromPersons} exact />
+        <Route path="/reports/between/dates" component={ReportBetweenDates} exact />
+        <Route path="/reports/between/dates/sites" component={ReportBetweenDatesAndSites} exact />
 
       </Switch>
     </Suspense>

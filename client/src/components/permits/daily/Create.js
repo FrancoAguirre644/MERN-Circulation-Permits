@@ -131,7 +131,7 @@ const Create = () => {
                             <div className="col-md-4">
                                 <Form.Group>
                                     <div className="input-group">
-                                        <Form.Control type="date" className="form-control" placeholder="Username" />
+                                        <Form.Control type="date" className="form-control"/>
                                     </div>
                                 </Form.Group>
                             </div>

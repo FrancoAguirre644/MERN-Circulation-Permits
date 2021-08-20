@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import TableReport from './TableReport';
 
-const ReportForPersons = () => {
+const ReportFromPersons = () => {
 
     const { state } = useContext(DataContext)
 
@@ -10,9 +10,9 @@ const ReportForPersons = () => {
 
     const [dailyPermitsResults, setDailyPermitsResults] = useState([])
 
-    const handleChangeInput = ({target}) => {
-        const filterDailyPermits = dailyPermits.filter(element => 
-            element.person === target.value
+    const handleChangeInput = ({ target }) => {
+        const filterDailyPermits = dailyPermits.filter(element =>
+            element.person._id === target.value
         );
 
         setDailyPermitsResults(filterDailyPermits)
@@ -26,6 +26,7 @@ const ReportForPersons = () => {
                         <label>
                             Select what type of permission you want to generate:
                         </label>
+                        <hr />
                         <select className="form-control" name="person" onChange={handleChangeInput}>
                             <option value="" selected disabled>Select Person</option>
                             {
@@ -37,11 +38,15 @@ const ReportForPersons = () => {
                             }
                         </select>
 
-                        <button className="btn btn-success btn-icon-text mt-2 p-2 w-100">
-                            <i className="mdi mdi-printer btn-icon-append"></i>
-                            Print
-                        </button>
-                        
+                        {
+                            dailyPermitsResults.length > 0 && (
+                                <button className="btn btn-success btn-icon-text mt-2 p-2 w-100">
+                                    <i className="mdi mdi-printer btn-icon-append"></i>
+                                    Print
+                                </button>
+                            )
+                        }
+
                     </div>
                 </div>
             </div>
@@ -64,12 +69,15 @@ const ReportForPersons = () => {
                                         dailyPermitsResults.map(dailyPermit => (
                                             <tr key={dailyPermit._id}>
                                                 <td> {new Date(dailyPermit.date).toLocaleDateString()} </td>
-                                                <td className="text-capitalize"> {dailyPermit.person} </td>
-                                                <td> {dailyPermit.from} </td>
-                                                <td> {dailyPermit.to} </td>
+                                                <td className="text-capitalize">
+                                                    {dailyPermit.person.firstName + " " +
+                                                        dailyPermit.person.lastName}
+                                                </td>
+                                                <td> {dailyPermit.from.site} </td>
+                                                <td> {dailyPermit.to.site} </td>
                                                 <td className="text-capitalize"> {dailyPermit.reason} </td>
                                             </tr>
-                                        )) 
+                                        ))
                                     }
                                 </tbody>
                             </table>
@@ -81,4 +89,4 @@ const ReportForPersons = () => {
     )
 }
 
-export default ReportForPersons
+export default ReportFromPersons
