@@ -1,6 +1,7 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { Form } from 'react-bootstrap'
+import { generatePDFDPermit } from '../../services/ReportGeneratorDPermit'
 
 const ReportBetweenDatesAndSites = () => {
 
@@ -15,6 +16,10 @@ const ReportBetweenDatesAndSites = () => {
 
     const dateFromRef = useRef()
     const dateToRef = useRef()
+
+    useEffect(() => {
+        setDailyPermitsResults(dailyPermits)
+    }, [dailyPermits])
 
     const filterBetweenDates = (e) => {
 
@@ -63,7 +68,7 @@ const ReportBetweenDatesAndSites = () => {
                                     <Form.Group>
                                         <select className="form-control" required
                                         onChange={(e) => setFromSide(e.target.value)} >
-                                            <option value="" selected disabled>Select Person</option>
+                                            <option value="" selected disabled>Select From</option>
                                             {
                                                 sites.map(site => (
                                                     <option value={site._id} key={site._id}>
@@ -78,7 +83,7 @@ const ReportBetweenDatesAndSites = () => {
                                     <Form.Group>
                                         <select className="form-control" required
                                         onChange={(e) => setToSide(e.target.value)} >
-                                            <option value="" selected disabled>Select Site</option>
+                                            <option value="" selected disabled>Select To</option>
                                             {
                                                 sites.map(site => (
                                                     <option value={site._id} key={site._id}>
@@ -99,9 +104,15 @@ const ReportBetweenDatesAndSites = () => {
 
                         {
                             dailyPermitsResults.length > 0 && (
-                                <button className="btn btn-success btn-icon-text mt-2 p-2 w-100">
-                                    <i className="mdi mdi-printer btn-icon-append"></i>
-                                    Print
+                                <button className="btn btn-success btn-icon-text mt-2 p-2 w-100"
+                                    onClick={() => 
+                                    generatePDFDPermit(
+                                        dailyPermitsResults,
+                                        `Bring permits between Date and Date that depart / arrive at a certain place.`
+                                    )}
+                                >
+                                <i className="mdi mdi-printer btn-icon-append"></i>
+                                Print
                                 </button>
                             )
                         }

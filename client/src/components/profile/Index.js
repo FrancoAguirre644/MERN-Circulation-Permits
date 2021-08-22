@@ -61,13 +61,19 @@ const Index = () => {
                                 placeholder="Add new Category" value={name}
                                 onChange={(e) => setName(e.target.value)} />
                         </div>
-                        <button type="button" className="btn btn-outline-info mr-2"
+
+                        <div className="col-md-4">
+                            <button type="button" className="btn btn-outline-info btn-icon-text mr-2"
+                            style={{ 'padding': '9px' }}
                             onClick={createProfile}>{id ? "Update" : "Create"}
-                        </button>
-                        <button type="button" className="btn btn-outline-success btn-icon-text"
-                            onClick={() => generatePDFProfile(profiles)}>
-                            Print<i className="mdi mdi-printer btn-icon-append"></i>
-                        </button>
+                                <i className="mdi mdi-account-plus btn-icon-append"></i>
+                            </button>
+                            <button type="button" className="btn btn-outline-success btn-icon-text"
+                                style={{ 'padding': '9px' }}
+                                onClick={() => generatePDFProfile(profiles)}>
+                                Print<i className="mdi mdi-printer btn-icon-append"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <div className="table-responsive">

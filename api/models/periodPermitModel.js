@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const dailyPermitSchema = new mongoose.Schema({
+const periodPermitSchema = new mongoose.Schema({
     person: {
         type: mongoose.Types.ObjectId,
         ref: 'Persons',
@@ -20,12 +20,21 @@ const dailyPermitSchema = new mongoose.Schema({
         ref: 'Sites',
         required: true
     },
-    reason: {
-        type: String,
-        required: true,
+    vehicle: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Vehicles',
+        required: true
+    },
+    days: {
+        type: Number,
+        required: true
+    },
+    vacations: {
+        type: Boolean,
+        required: true
     },
 }, {
     timestamps: true
 })
 
-module.exports = mongoose.model('dailyPermits', dailyPermitSchema)
+module.exports = mongoose.model('periodPermits', periodPermitSchema)

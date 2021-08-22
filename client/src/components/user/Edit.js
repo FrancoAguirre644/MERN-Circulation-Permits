@@ -60,7 +60,7 @@ const Edit = ({ match }) => {
                                         <label htmlFor="exampleInputUsername1">Profile</label>
                                         <select className="form-control" name="profile" value={user.profile}
                                             onChange={handleChangeInput}>
-                                            <option value="User">User</option>
+                                            <option value="" selected disabled>Select Profile</option>
                                             {
                                                 profiles.map(profile => (
                                                     <option value={profile.name} key={profile._id}>{profile.name}</option>

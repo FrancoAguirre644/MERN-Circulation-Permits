@@ -35,7 +35,7 @@ const dailyPermitController = {
     getDailyPermit: async (req, res) => {
         try {
 
-            const dailyPermit = await DailyPermits.findOne({ _id: req.params.id })
+            const dailyPermit = await DailyPermits.findOne({ _id: req.params.id }).populate(['person', 'from', 'to'])
 
             res.status(200).json(dailyPermit)
         } catch (err) {
@@ -45,7 +45,7 @@ const dailyPermitController = {
     getAllDailyPermits: async (req, res) => {
         try {
 
-            const dailyPermits = await DailyPermits.find()
+            const dailyPermits = await DailyPermits.find().populate(['person', 'from', 'to'])
             
             res.status(200).json({ dailyPermits })
         } catch (err) {

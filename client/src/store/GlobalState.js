@@ -9,7 +9,7 @@ export const DataProvider = ({ children }) => {
     const initialState = {
         notify: {}, auth: {}, modal: [{ show: false }],
         users: [], profiles: [], sites: [], persons: [],
-        vehicles: [], dailyPermits: []
+        vehicles: [], dailyPermits: [], periodPermits: []
     }
 
     const [state, dispatch] = useReducer(reducers, initialState)
@@ -33,26 +33,26 @@ export const DataProvider = ({ children }) => {
             })
 
         }
-        /*
-                getData('profiles').then(res => {
-                    if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-        
-                    dispatch({
-                        type: "ADD_PROFILES",
-                        payload: res.profiles
-                    })
-        
-                })
-        
-                getData('users').then(res => {
-                    if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-        
-                    dispatch({
-                        type: "ADD_USERS",
-                        payload: res.users
-                    })
-        
-                }) */
+
+        getData('profiles').then(res => {
+            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+            dispatch({
+                type: "ADD_PROFILES",
+                payload: res.profiles
+            })
+
+        })
+
+        getData('users').then(res => {
+            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+            dispatch({
+                type: "ADD_USERS",
+                payload: res.users
+            })
+
+        })
 
         getData('sites').then(res => {
 
@@ -85,7 +85,7 @@ export const DataProvider = ({ children }) => {
                 payload: res.vehicles
             })
 
-        }) 
+        })
 
         getData('dailyPermits').then(res => {
 
@@ -94,6 +94,17 @@ export const DataProvider = ({ children }) => {
             dispatch({
                 type: "ADD_DAILYPERMITS",
                 payload: res.dailyPermits
+            })
+
+        })
+
+        getData('periodPermits').then(res => {
+            
+            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+            dispatch({
+                type: "ADD_PERIODPERMITS",
+                payload: res.periodPermits
             })
 
         })

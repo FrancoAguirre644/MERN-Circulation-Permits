@@ -1,25 +1,25 @@
 import { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../store/GlobalState';
-import { generatePDFDPermit } from '../../services/ReportGeneratorDPermit'
+import { generatePDFPPermit } from '../../services/ReportGeneratorPPermit'
 
-const ReportFromPersons = () => {
+const ReportFromVehicles = () => {
 
     const { state } = useContext(DataContext)
 
-    const { persons, dailyPermits } = state
+    const { vehicles, periodPermits } = state
 
-    const [dailyPermitsResults, setDailyPermitsResults] = useState([])
+    const [periodPermitsResults, setPeriodPermitsResults] = useState([])
 
     useEffect(() => {
-        setDailyPermitsResults(dailyPermits)
-    }, [dailyPermits])
+        setPeriodPermitsResults(periodPermits)
+    }, [periodPermits])
 
     const handleChangeInput = ({ target }) => {
-        const filterDailyPermits = dailyPermits.filter(element =>
-            element.person._id === target.value
+        const filterPeriodPermits = periodPermits.filter(element =>
+            element.vehicle._id === target.value
         );
 
-        setDailyPermitsResults(filterDailyPermits)
+        setPeriodPermitsResults(filterPeriodPermits)
     }
 
     return (
@@ -32,25 +32,25 @@ const ReportFromPersons = () => {
                         </label>
                         <hr />
                         <select className="form-control" name="person" onChange={handleChangeInput}>
-                            <option value="" selected disabled>Select Person</option>
+                            <option value="" selected disabled>Select Vehicle</option>
                             {
-                                persons.map(person => (
-                                    <option value={person._id} key={person._id}>
-                                        {person.firstName + " " + person.lastName + " - " + person.document}
+                                vehicles.map(vehicle => (
+                                    <option value={vehicle._id} key={vehicle._id}>
+                                        {vehicle.patent}
                                     </option>
                                 ))
                             }
                         </select>
 
                         {
-                            dailyPermitsResults.length > 0 && (
+                            periodPermitsResults.length > 0 && (
                                 <button className="btn btn-success btn-icon-text mt-2 p-2 w-100"
-                                    onClick={() => 
-                                        generatePDFDPermit(
-                                            dailyPermitsResults,
-                                            `Bring Permit per Person.`
-                                    )}
-                                >
+                                    onClick={ () => 
+                                    generatePDFPPermit(
+                                        periodPermitsResults, 
+                                        'Bringing Permit by Vehicle.'
+                                    ) 
+                                }>
                                     <i className="mdi mdi-printer btn-icon-append"></i>
                                     Print
                                 </button>
@@ -71,21 +71,25 @@ const ReportFromPersons = () => {
                                         <th> Person </th>
                                         <th> From </th>
                                         <th> To </th>
-                                        <th> Reason </th>
+                                        <th> Vehicle </th>
+                                        <th> Days </th>
+                                        <th> Vacations </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
-                                        dailyPermitsResults.map(dailyPermit => (
-                                            <tr key={dailyPermit._id}>
-                                                <td> {new Date(dailyPermit.date).toLocaleDateString()} </td>
+                                        periodPermitsResults.map(periodPermit => (
+                                            <tr key={periodPermit._id}>
+                                                <td> {new Date(periodPermit.date).toLocaleDateString()} </td>
                                                 <td className="text-capitalize">
-                                                    {dailyPermit.person.firstName + " " +
-                                                        dailyPermit.person.lastName}
+                                                    {periodPermit.person.firstName + " " +
+                                                        periodPermit.person.lastName}
                                                 </td>
-                                                <td> {dailyPermit.from.site} </td>
-                                                <td> {dailyPermit.to.site} </td>
-                                                <td className="text-capitalize"> {dailyPermit.reason} </td>
+                                                <td> {periodPermit.from.site} </td>
+                                                <td> {periodPermit.to.site} </td>
+                                                <td> {periodPermit.vehicle.patent} </td>
+                                                <td> {periodPermit.days} </td>
+                                                <td> {periodPermit.vacations ? 'Yes' : 'No'} </td>
                                             </tr>
                                         ))
                                     }
@@ -99,4 +103,4 @@ const ReportFromPersons = () => {
     )
 }
 
-export default ReportFromPersons
+export default ReportFromVehicles

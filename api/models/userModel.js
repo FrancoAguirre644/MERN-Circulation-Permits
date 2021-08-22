@@ -1,6 +1,6 @@
-const moongose = require('mongoose')
+const mongoose = require('mongoose')
 
-const userSchema = new moongose.Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -13,7 +13,6 @@ const userSchema = new moongose.Schema({
     },
     profile: {
         type: String,
-        required: true,
         default: 'user'
     },
     password: {
@@ -24,4 +23,4 @@ const userSchema = new moongose.Schema({
     timestamps: true
 })
 
-module.exports = moongose.model('Users', userSchema)
+module.exports = mongoose.model('Users', userSchema)

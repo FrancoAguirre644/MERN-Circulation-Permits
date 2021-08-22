@@ -41,7 +41,7 @@ const Index = () => {
                                             <td> {person.lastName} </td>
                                             <td> {person.document} </td>
                                             <td>
-                                                <Link to={`persons/${person._id}`}>
+                                                <Link to={`persons/${person._id}`} className="link">
                                                     <i className="mdi mdi-tooltip-edit mr-3"
                                                         style={{ cursor: 'pointer' }}>
                                                     </i>

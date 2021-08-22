@@ -52,7 +52,7 @@ const Index = () => {
                                             </td>
                                             <td className="text-capitalize"> {user.profile} </td>
                                             <td>
-                                                <Link to={`users/${user._id}`}>
+                                                <Link to={`users/${user._id}`} className="link">
                                                     <i className="mdi mdi-tooltip-edit mr-3"
                                                         style={{ cursor: 'pointer' }}>
                                                     </i>

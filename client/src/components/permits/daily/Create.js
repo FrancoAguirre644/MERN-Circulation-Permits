@@ -31,6 +31,7 @@ const Create = () => {
 
         if(!person) {
             refCompleteName.current.value = ""
+            setDailyPermit({...dailyPermit, 'personId': ''})
             return dispatch({ type: 'NOTIFY', payload: { error: 'Person not exists', show: true } }) 
         }
         

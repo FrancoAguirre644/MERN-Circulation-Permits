@@ -44,6 +44,8 @@ const authController = {
                 msg: "Login Success!",
                 user: {
                     username: user.username,
+                    email: user.email,
+                    profile: user.profile,
                 },
                 token
             })

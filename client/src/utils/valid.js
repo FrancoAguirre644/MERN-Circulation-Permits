@@ -75,6 +75,16 @@ export const validateDailyPermit = (personId, fromSiteId, toSiteId, reason) => {
 
 }
 
+export const validatePeriodPermit = (personId, fromSiteId, toSiteId, vehicleId, days) => {
+
+    if (!personId || !fromSiteId || !toSiteId || !vehicleId || !days) {
+        return 'Please add all fields.'
+    }
+
+    if(days < 0) return 'Insert a valid days.'
+
+}
+
 function validateEmail(email) {
     const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return reg.test(email);

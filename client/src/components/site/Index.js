@@ -41,7 +41,7 @@ const Index = () => {
                                                 {site.postalCode}
                                             </td>
                                             <td>
-                                                <Link to={`sites/${site._id}`}>
+                                                <Link to={`sites/${site._id}`} className="link">
                                                     <i className="mdi mdi-tooltip-edit mr-3"
                                                         style={{ cursor: 'pointer' }}>
                                                     </i>

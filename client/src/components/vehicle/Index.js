@@ -43,7 +43,7 @@ const Index = () => {
                                             <td> {vehicle.model} </td>
                                             <td> {vehicle.year} </td>
                                             <td>
-                                                <Link to={`vehicles/${vehicle._id}`}>
+                                                <Link to={`vehicles/${vehicle._id}`} className="link">
                                                     <i className="mdi mdi-tooltip-edit mr-3"
                                                         style={{ cursor: 'pointer' }}>
                                                     </i>

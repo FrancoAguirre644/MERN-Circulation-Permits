@@ -1,6 +1,7 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { Form } from 'react-bootstrap'
+import { generatePDFDPermit } from '../../services/ReportGeneratorDPermit'
 
 const ReportBetweenDates = () => {
 
@@ -12,6 +13,10 @@ const ReportBetweenDates = () => {
 
     const dateFromRef = useRef()
     const dateToRef = useRef()
+
+    useEffect(() => {
+        setDailyPermitsResults(dailyPermits)
+    }, [dailyPermits])
 
     const filterBetweenDates = (e) => {
         e.preventDefault()
@@ -64,7 +69,13 @@ const ReportBetweenDates = () => {
 
                         {
                             dailyPermitsResults.length > 0 && (
-                                <button className="btn btn-success btn-icon-text mt-2 p-2 w-100">
+                                <button className="btn btn-success btn-icon-text mt-2 p-2 w-100"
+                                    onClick={() => 
+                                    generatePDFDPermit(
+                                        dailyPermitsResults,
+                                        `Bring Permits between Date and Date (${dateFromRef.current.value} AND ${dateToRef.current.value}).`
+                                    )}
+                                >
                                     <i className="mdi mdi-printer btn-icon-append"></i>
                                     Print
                                 </button>
