@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { generatePDFPPermit } from '../../services/ReportGeneratorPPermit'
+import { Redirect } from 'react-router-dom';
 
 const ReportFromVehicles = () => {
 
     const { state } = useContext(DataContext)
 
-    const { vehicles, periodPermits } = state
+    const { auth, vehicles, periodPermits } = state
 
     const [periodPermitsResults, setPeriodPermitsResults] = useState([])
 
@@ -22,13 +23,15 @@ const ReportFromVehicles = () => {
         setPeriodPermitsResults(filterPeriodPermits)
     }
 
+    if(!auth.user || auth.user.profile !== 'auditoria') return  <Redirect to="/" />;
+
     return (
         <>
             <div className="col-lg-12 grid-margin stretch-card">
                 <div className="card">
                     <div className="card-body">
                         <label>
-                            Select what type of permission you want to generate:
+                            Bring Permit per Vehicle.
                         </label>
                         <hr />
                         <select className="form-control" name="person" onChange={handleChangeInput}>

@@ -3,12 +3,13 @@ import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { postData, putData } from '../../utils/fetchData';
 import { generatePDFProfile } from '../../services/ReportGeneratorProfile'
+import { Redirect } from 'react-router-dom';
 
 const Index = () => {
 
     const { state, dispatch } = useContext(DataContext)
 
-    const { profiles } = state
+    const { auth, profiles } = state
 
     const [name, setName] = useState('')
 
@@ -46,6 +47,8 @@ const Index = () => {
         setId(profile._id)
         setName(profile.name)
     }
+
+    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
 
     return (
         <div className="col-lg-12 grid-margin stretch-card">

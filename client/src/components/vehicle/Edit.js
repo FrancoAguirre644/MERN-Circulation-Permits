@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { putData } from '../../utils/fetchData';
@@ -10,7 +10,7 @@ const Edit = ({ match }) => {
 
     const { state, dispatch } = useContext(DataContext)
 
-    const { vehicles } = state
+    const { auth, vehicles } = state
 
     const [vehicle, setVehicle] = useState({})
 
@@ -42,6 +42,8 @@ const Edit = ({ match }) => {
 
         router.push('/vehicles')
     }
+
+    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
 
     return (
         <div className="row justify-content-center">

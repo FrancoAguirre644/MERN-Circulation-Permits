@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { generatePDFUser } from '../../services/ReportGeneratorUser'
 
 const Index = () => {
 
     const { state, dispatch } = useContext(DataContext)
 
-    const { users } = state
+    const { auth, users } = state
+
+    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
 
     return (
         <div className="col-lg-12 grid-margin stretch-card">

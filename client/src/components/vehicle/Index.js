@@ -6,7 +6,7 @@ const Index = () => {
 
     const { state, dispatch } = useContext(DataContext)
 
-    const { vehicles } = state
+    const { auth, vehicles } = state
 
     return (
         <div className="col-lg-12 grid-margin stretch-card">
@@ -30,7 +30,10 @@ const Index = () => {
                                     <th> Brand </th>
                                     <th> Model </th>
                                     <th> Year </th>
-                                    <th> Actions </th>
+                                    {
+                                        auth.user && auth.user.profile === 'admin' &&
+                                        <th> Actions </th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,20 +45,23 @@ const Index = () => {
                                             <td> {vehicle.brand} </td>
                                             <td> {vehicle.model} </td>
                                             <td> {vehicle.year} </td>
-                                            <td>
-                                                <Link to={`vehicles/${vehicle._id}`} className="link">
-                                                    <i className="mdi mdi-tooltip-edit mr-3"
-                                                        style={{ cursor: 'pointer' }}>
+                                            {
+                                                auth.user && auth.user.profile === 'admin' &&
+                                                <td>
+                                                    <Link to={`vehicles/${vehicle._id}`} className="link">
+                                                        <i className="mdi mdi-tooltip-edit mr-3"
+                                                            style={{ cursor: 'pointer' }}>
+                                                        </i>
+                                                    </Link>
+                                                    <i className="mdi mdi-delete"
+                                                        style={{ cursor: 'pointer' }}
+                                                        onClick={() => dispatch({
+                                                            type: 'ADD_MODAL',
+                                                            payload: [{ data: vehicles, id: vehicle._id, title: `${vehicle.brand} ${vehicle.model} - ${vehicle.patent}`, type: 'ADD_VEHICLES', show: true }]
+                                                        })}>
                                                     </i>
-                                                </Link>
-                                                <i className="mdi mdi-delete"
-                                                    style={{ cursor: 'pointer' }}
-                                                    onClick={() => dispatch({
-                                                        type: 'ADD_MODAL',
-                                                        payload: [{ data: vehicles, id: vehicle._id, title: `${vehicle.brand} ${vehicle.model} - ${vehicle.patent}`, type: 'ADD_VEHICLES', show: true }]
-                                                    })}>
-                                                </i>
-                                            </td>
+                                                </td>
+                                            }
                                         </tr>
                                     ))
                                 }

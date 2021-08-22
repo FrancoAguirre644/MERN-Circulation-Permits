@@ -2,12 +2,13 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { Form } from 'react-bootstrap'
 import { generatePDFDPermit } from '../../services/ReportGeneratorDPermit'
+import { Redirect } from 'react-router-dom' 
 
 const ReportBetweenDates = () => {
 
     const { state } = useContext(DataContext)
 
-    const { dailyPermits } = state
+    const { auth, dailyPermits } = state
 
     const [dailyPermitsResults, setDailyPermitsResults] = useState([])
 
@@ -32,13 +33,15 @@ const ReportBetweenDates = () => {
         setDailyPermitsResults(filterDailyPermits)
     }
 
+    if(!auth.user || auth.user.profile !== 'auditoria') return  <Redirect to="/" />;
+
     return (
         <>
             <div className="col-lg-12 grid-margin stretch-card">
                 <div className="card">
                     <div className="card-body">
                         <label>
-                            Select what type of permission you want to generate:
+                            Bring Active Permits between Date and Date.
                         </label>
                         <hr />
                         <form onSubmit={filterBetweenDates}>

@@ -31,7 +31,7 @@ const Sidebar = () => {
             </div>
             <div className="profile-name">
               <h5 className="mb-0 font-weight-normal"><Trans>{auth.user.username}</Trans></h5>
-              <span><Trans>Gold Member</Trans></span>
+              <span><Trans>{ auth.user.profile }</Trans></span>
             </div>
           </div>
           <Dropdown alignRight>
@@ -106,7 +106,7 @@ const Sidebar = () => {
           </Link>
         </li>
         { /*******************************************************************************************************/}
-        {Object.keys(auth).length > 0 && adminRoute()}
+        {Object.keys(auth).length > 0 && auth.user.profile === 'admin' && adminRoute()}
         <li className={isPathActive('/permits') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
           <Link className="nav-link" to="/permits">
             <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
@@ -131,7 +131,9 @@ const Sidebar = () => {
             <span className="menu-title"><Trans>Vehicles</Trans></span>
           </Link>
         </li>
-        <li className={isPathActive('/reports') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
+        <li className={isPathActive('/reports') || isPathActive('/reports/from/persons')
+          || isPathActive('/reports/from/vehicles') || isPathActive('/reports/between/dates')
+          || isPathActive('/reports/between/dates/sites') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
           <Link className="nav-link" to="/reports">
             <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
             <span className="menu-title"><Trans>Reports</Trans></span>

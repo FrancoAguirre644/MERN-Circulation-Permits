@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { DataContext } from '../../store/GlobalState';
 import { postData } from '../../utils/fetchData';
 import { validateRegister } from '../../utils/valid'
@@ -9,7 +9,7 @@ const Create = () => {
 
     const { state, dispatch } = useContext(DataContext)
 
-    const { users, profiles } = state
+    const { auth, users, profiles } = state
 
     const [user, setUser] = useState({
         username: '',
@@ -43,6 +43,8 @@ const Create = () => {
         router.push('/users')
 
     }
+
+    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
 
     return (
         <div className="row justify-content-center">

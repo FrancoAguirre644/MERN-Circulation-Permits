@@ -28,7 +28,7 @@ const ReportFromPersons = () => {
                 <div className="card">
                     <div className="card-body">
                         <label>
-                            Select what type of permission you want to generate:
+                            Bring Permit per Person.
                         </label>
                         <hr />
                         <select className="form-control" name="person" onChange={handleChangeInput}>
