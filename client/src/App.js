@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './App.scss';
 import AppRoutes from './AppRoutes';
 import { withRouter } from 'react-router-dom';
-import Navbar from './ui/shared/Navbar';
-import Sidebar from './ui/shared/Sidebar';
-import Notify from './ui/shared/Notify';
-import ModalCustom from './ui/shared/Modal';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import Notify from './components/Notify';
+import ModalCustom from './components/Modal';
 
 class App extends Component {
   state = {}

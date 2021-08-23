@@ -15,7 +15,6 @@ const Index = () => {
     const [id, setId] = useState('')
 
     const createProfile = async () => {
-        //if (auth.user.role !== 'admin') return dispatch({ type: 'NOTIFY', payload: { error: 'Authentication is not valid.' } })
 
         if (!name) return dispatch({ type: 'NOTIFY', payload: { error: 'Name is required.' } })
 

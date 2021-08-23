@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { Trans } from 'react-i18next';
-import { DataContext } from '../../store/GlobalState';
+import { DataContext } from '../store/GlobalState';
 
 const Navbar = () => {
 
@@ -19,7 +19,7 @@ const Navbar = () => {
   const logout = () => {
     localStorage.removeItem('jwt')
     dispatch({ type: "AUTH", payload: {} })
-    dispatch({ type: 'NOTIFY', payload: { success: 'Logged out!' } })
+    dispatch({ type: 'NOTIFY', payload: { success: 'Session Closed Successfully.' } })
     router.push('/')
   }
 
@@ -38,7 +38,7 @@ const Navbar = () => {
           >
             <div className="preview-thumbnail">
               <div className="preview-icon bg-dark rounded-circle">
-                <i className="mdi mdi-file-outline text-primary"></i>
+                <i className="mdi mdi-walk text-primary"></i>
               </div>
             </div>
             <div className="preview-item-content">
@@ -51,7 +51,7 @@ const Navbar = () => {
           >
             <div className="preview-thumbnail">
               <div className="preview-icon bg-dark rounded-circle">
-                <i className="mdi mdi-web text-info"></i>
+                <i className="mdi mdi-map-marker-radius text-info"></i>
               </div>
             </div>
             <div className="preview-item-content">
@@ -64,7 +64,7 @@ const Navbar = () => {
           >
             <div className="preview-thumbnail">
               <div className="preview-icon bg-dark rounded-circle">
-                <i className="mdi mdi-layers text-danger"></i>
+                <i className="mdi mdi-truck text-danger"></i>
               </div>
             </div>
             <div className="preview-item-content">

@@ -20,7 +20,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (auth.user) setData({ ...data, username: auth.user.username })
-    }, [auth.user])
+    }, [auth.user, setData])
 
     const handleChange = e => {
         const { name, value } = e.target

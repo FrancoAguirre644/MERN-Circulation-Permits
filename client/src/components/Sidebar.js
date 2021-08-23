@@ -2,7 +2,7 @@ import { Link, useLocation, withRouter } from 'react-router-dom';
 import { Trans } from 'react-i18next';
 import { useContext } from 'react';
 import { Dropdown } from 'react-bootstrap'
-import { DataContext } from '../../store/GlobalState';
+import { DataContext } from '../store/GlobalState';
 
 const Sidebar = () => {
 
@@ -69,7 +69,7 @@ const Sidebar = () => {
         </li>
         <li className={isPathActive('/profiles') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
           <Link className="nav-link" to="/profiles">
-            <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
+            <span className="menu-icon"><i className="mdi mdi mdi-account-key"></i></span>
             <span className="menu-title"><Trans>Profiles</Trans></span>
           </Link>
         </li>
@@ -100,25 +100,25 @@ const Sidebar = () => {
         {Object.keys(auth).length > 0 && auth.user.profile === 'admin' && adminRoute()}
         <li className={isPathActive('/permits') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
           <Link className="nav-link" to="/permits">
-            <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
+            <span className="menu-icon"><i className="mdi mdi-account-card-details"></i></span>
             <span className="menu-title"><Trans>Permits</Trans></span>
           </Link>
         </li>
         <li className={isPathActive('/persons') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
           <Link className="nav-link" to="/persons">
-            <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
+            <span className="menu-icon"><i className="mdi mdi-walk"></i></span>
             <span className="menu-title"><Trans>Persons</Trans></span>
           </Link>
         </li>
         <li className={isPathActive('/sites') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
           <Link className="nav-link" to="/sites">
-            <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
+            <span className="menu-icon"><i className="mdi mdi-map-marker-radius"></i></span>
             <span className="menu-title"><Trans>Sites</Trans></span>
           </Link>
         </li>
         <li className={isPathActive('/vehicles') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
           <Link className="nav-link" to="/vehicles">
-            <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
+            <span className="menu-icon"><i className="mdi mdi-truck"></i></span>
             <span className="menu-title"><Trans>Vehicles</Trans></span>
           </Link>
         </li>
@@ -126,7 +126,7 @@ const Sidebar = () => {
           || isPathActive('/reports/from/vehicles') || isPathActive('/reports/between/dates')
           || isPathActive('/reports/between/dates/sites') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
           <Link className="nav-link" to="/reports">
-            <span className="menu-icon"><i className="mdi mdi-account-circle"></i></span>
+            <span className="menu-icon"><i className="mdi mdi-file-document"></i></span>
             <span className="menu-title"><Trans>Reports</Trans></span>
           </Link>
         </li>

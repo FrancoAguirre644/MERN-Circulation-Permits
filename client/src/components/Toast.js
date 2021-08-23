@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Toast } from 'react-bootstrap'
-import { DataContext } from '../../store/GlobalState';
+import { DataContext } from '../store/GlobalState';
 
 const ToastCustom = ({ msg, handleShow, bgColor }) => {
 
