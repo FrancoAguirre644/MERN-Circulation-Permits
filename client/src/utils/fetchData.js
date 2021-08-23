@@ -5,7 +5,7 @@ export const getData = async (url, token) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-                Authorization: `${localStorage.getItem('jwt')}`,
+            Authorization: token
         },
     })
 
@@ -20,7 +20,7 @@ export const postData = async (url, post, token) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-                Authorization: `${localStorage.getItem('jwt')}`,
+            Authorization: token
         },
         body: JSON.stringify(post)
     })
@@ -34,7 +34,7 @@ export const putData = async (url, post, token) => {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-                Authorization: `${localStorage.getItem('jwt')}`,
+            Authorization: token
         },
         body: JSON.stringify(post)
     })
@@ -49,7 +49,7 @@ export const patchData = async (url, post, token) => {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-                Authorization: `${localStorage.getItem('jwt')}`,
+            Authorization: token
         },
         body: JSON.stringify(post)
     })
@@ -64,7 +64,7 @@ export const deleteData = async (url, token) => {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-                Authorization: `${localStorage.getItem('jwt')}`,
+            Authorization: token
         },
     })
 

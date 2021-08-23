@@ -14,13 +14,15 @@ export const DataProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducers, initialState)
 
+    const { auth } = state
+
     useEffect(() => {
 
         const token = localStorage.getItem('jwt');
 
         if (token) {
 
-            getData('auth/verify').then(res => {
+            getData('auth/verify', token).then(res => {
                 if (res.err) return localStorage.removeItem('jwt')
 
                 dispatch({
@@ -31,28 +33,7 @@ export const DataProvider = ({ children }) => {
                     }
                 })
             })
-
         }
-
-        getData('profiles').then(res => {
-            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-
-            dispatch({
-                type: "ADD_PROFILES",
-                payload: res.profiles
-            })
-
-        })
-
-        getData('users').then(res => {
-            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-
-            dispatch({
-                type: "ADD_USERS",
-                payload: res.users
-            })
-
-        })
 
         getData('sites').then(res => {
 
@@ -99,7 +80,7 @@ export const DataProvider = ({ children }) => {
         })
 
         getData('periodPermits').then(res => {
-            
+
             if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
             dispatch({
@@ -110,6 +91,37 @@ export const DataProvider = ({ children }) => {
         })
 
     }, [])
+
+
+    useEffect(() => {
+
+        if(auth.token && auth.user.profile === "admin") {
+            getData('profiles', auth.token).then(res => {
+                if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+                dispatch({
+                    type: "ADD_PROFILES",
+                    payload: res.profiles
+                })
+
+            })
+
+            getData('users', auth.token).then(res => {
+                if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+                dispatch({
+                    type: "ADD_USERS",
+                    payload: res.users
+                })
+
+            })
+            
+        } else {
+            dispatch({ type: 'ADD_PROFILES', payload: [] })
+            dispatch({ type: 'ADD_USERS', payload: [] })
+        }
+
+    }, [auth.token, auth.user])
 
     return (
         <DataContext.Provider value={{ state, dispatch }}>

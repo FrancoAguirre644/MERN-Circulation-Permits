@@ -47,6 +47,7 @@ const Create = () => {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Create Site</h4>
+                        <hr />
                         <form className="forms-sample" onSubmit={handleSubmit}>
                             <Form.Group>
                                 <label>Site</label>

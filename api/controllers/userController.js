@@ -49,9 +49,13 @@ const userController = {
     deleteUser: async (req, res) => {
         try {
 
-            await Users.findByIdAndDelete(req.params.id)
-
-            res.status(200).json({ msg: 'User deleted successfully.' })
+            if (req.user.profile === "admin") {
+                await Users.findByIdAndDelete(req.params.id)
+                res.status(200).json({ msg: 'User deleted successfully.' })
+            } else {
+                res.status(400).json({ err: 'Profile is not valid.' })
+            }
+            
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { putData } from '../../utils/fetchData';
@@ -33,7 +33,7 @@ const Edit = ({ match }) => {
 
         if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
         
-        const res = await putData(`vehicles/${vehicle._id}`, vehicle)
+        const res = await putData(`vehicles/${vehicle._id}`, vehicle, auth.token)
         if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
         
         dispatch(updateItem(vehicles, vehicle._id, res.vehicle, 'ADD_VEHICLES'))
@@ -43,7 +43,7 @@ const Edit = ({ match }) => {
         router.push('/vehicles')
     }
 
-    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
+    if(!auth.user || auth.user.profile !== 'admin') return null;
 
     return (
         <div className="row justify-content-center">
@@ -51,6 +51,7 @@ const Edit = ({ match }) => {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Update Person</h4>
+                        <hr />
                         <form className="forms-sample" onSubmit={handleSubmit}>
                             <Form.Group>
                                 <label>Patent</label>

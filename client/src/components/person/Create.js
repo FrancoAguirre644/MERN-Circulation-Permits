@@ -9,7 +9,7 @@ const Create = () => {
 
     const { state, dispatch } = useContext(DataContext)
 
-    const { persons } = state
+    const { auth, persons } = state
 
     const [person, setPerson] = useState({
         firstName: '',
@@ -31,7 +31,7 @@ const Create = () => {
 
         if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
 
-        const res = await postData('persons', person)
+        const res = await postData('persons', person, auth.token)
         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
         dispatch({ type: "ADD_PERSONS", payload: [...persons, res.newPerson] })
@@ -48,6 +48,7 @@ const Create = () => {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Create Person</h4>
+                        <hr />
                         <form className="forms-sample" onSubmit={handleSubmit}>
                             <Form.Group>
                                 <label>Fist Name</label>

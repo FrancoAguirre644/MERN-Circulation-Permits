@@ -4,7 +4,7 @@ const auth = require('../middlewares/auth')
 
 router.route('/')
     .get(siteController.getAllSites)
-    .post(auth, siteController.createSite)
+    .post(siteController.createSite)
 
 router.route('/:id')
     .get(auth, siteController.getSite)

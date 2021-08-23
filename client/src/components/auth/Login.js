@@ -27,7 +27,7 @@ const Login = () => {
     const res = await postData('auth/login', userData)
 
     if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-    dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
+    dispatch({ type: 'NOTIFY', payload: { success: res.msg, show: true } })
 
     dispatch({
       type: 'AUTH', payload: {

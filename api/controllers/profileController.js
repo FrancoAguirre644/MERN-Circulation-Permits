@@ -12,7 +12,7 @@ const profileController = {
 
             await newProfile.save()
 
-            res.status(201).json({ 
+            res.status(201).json({
                 msg: "Profile created successfully.",
                 newProfile
             })
@@ -23,14 +23,19 @@ const profileController = {
     updateProfile: async (req, res) => {
         try {
 
-            const { name } = req.body
+            if (req.user.profile === "admin") {
+                const { name } = req.body
 
-            const newProfile = await Profiles.findOneAndUpdate({ _id: req.params.id }, { name }, {new: true})
+                const newProfile = await Profiles.findOneAndUpdate({ _id: req.params.id }, { name }, { new: true })
 
-            res.status(200).json({ 
-                msg: 'Profile updated successfully.',
-                profile: newProfile._doc,
-            })
+                res.status(200).json({
+                    msg: 'Profile updated successfully.',
+                    profile: newProfile._doc,
+                })
+            } else {
+                res.status(400).json({ err: 'Profile is not valid.' })
+            }
+
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }
@@ -38,9 +43,12 @@ const profileController = {
     deleteProfile: async (req, res) => {
         try {
 
-            await Profiles.findByIdAndDelete(req.params.id)
-
-            res.status(200).json({ msg: 'Profile deleted successfully.' })
+            if (req.user.profile === "admin") {
+                await Profiles.findByIdAndDelete(req.params.id)
+                res.status(200).json({ msg: 'Profile deleted successfully.' })
+            } else {
+                res.status(400).json({ err: 'Profile is not valid.' })
+            }
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }

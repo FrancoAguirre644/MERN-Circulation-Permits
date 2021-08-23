@@ -3,7 +3,6 @@ import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { postData, putData } from '../../utils/fetchData';
 import { generatePDFProfile } from '../../services/ReportGeneratorProfile'
-import { Redirect } from 'react-router-dom';
 
 const Index = () => {
 
@@ -25,14 +24,14 @@ const Index = () => {
         let res;
 
         if (id) {
-            res = await putData(`profiles/${id}`, { name })
+            res = await putData(`profiles/${id}`, { name }, auth.token)
 
             if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
             dispatch(updateItem(profiles, id, res.profile, 'ADD_PROFILES'))
 
         } else {
-            res = await postData('profiles', { name })
+            res = await postData('profiles', { name }, auth.token)
 
             if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
             dispatch({ type: "ADD_PROFILES", payload: [...profiles, res.newProfile] })
@@ -48,7 +47,7 @@ const Index = () => {
         setName(profile.name)
     }
 
-    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
+    if(!auth.user || auth.user.profile !== 'admin') return null;
 
     return (
         <div className="col-lg-12 grid-margin stretch-card">

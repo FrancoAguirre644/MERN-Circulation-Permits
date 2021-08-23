@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { putData } from '../../utils/fetchData';
@@ -33,7 +33,7 @@ const Edit = ({ match }) => {
 
         if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
 
-        const res = await putData(`sites/${site._id}`, site)
+        const res = await putData(`sites/${site._id}`, site, auth.token)
         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
         dispatch(updateItem(sites, site._id, res.site, 'ADD_SITES'))
@@ -43,7 +43,7 @@ const Edit = ({ match }) => {
         router.push('/sites')
     }
 
-    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
+    if(!auth.user || auth.user.profile !== 'admin') return null;
 
     return (
         <div className="row justify-content-center">
@@ -51,6 +51,7 @@ const Edit = ({ match }) => {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Update Site</h4>
+                        <hr />
                         <form className="forms-sample" onSubmit={handleSubmit}>
                             <Form.Group>
                                 <label>Site</label>

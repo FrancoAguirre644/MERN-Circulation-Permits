@@ -23,53 +23,65 @@ const Navbar = () => {
     router.push('/')
   }
 
+  const LinksCreate = () => {
+    return (
+      <Dropdown alignRight as="li" className="nav-item d-none d-lg-block">
+        <Dropdown.Toggle className="nav-link btn btn-success create-new-button no-caret">
+          + <Trans>Create New Project</Trans>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu className="navbar-dropdown preview-list create-new-dropdown-menu">
+          <h6 className="p-3 mb-0"><Trans>Projects</Trans></h6>
+          <Dropdown.Divider />
+          <Dropdown.Item className="preview-item"
+            onClick={(evt) => { evt.preventDefault(); return router.push('/persons/create') }}
+          >
+            <div className="preview-thumbnail">
+              <div className="preview-icon bg-dark rounded-circle">
+                <i className="mdi mdi-file-outline text-primary"></i>
+              </div>
+            </div>
+            <div className="preview-item-content">
+              <p className="preview-subject mb-1"><Trans>Persons</Trans></p>
+            </div>
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item className="preview-item"
+            onClick={(evt) => { evt.preventDefault(); return router.push('/sites/create') }}
+          >
+            <div className="preview-thumbnail">
+              <div className="preview-icon bg-dark rounded-circle">
+                <i className="mdi mdi-web text-info"></i>
+              </div>
+            </div>
+            <div className="preview-item-content">
+              <p className="preview-subject mb-1"><Trans>Sites</Trans></p>
+            </div>
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item className="preview-item"
+            onClick={(evt) => { evt.preventDefault(); return router.push('/vehicles/create') }}
+          >
+            <div className="preview-thumbnail">
+              <div className="preview-icon bg-dark rounded-circle">
+                <i className="mdi mdi-layers text-danger"></i>
+              </div>
+            </div>
+            <div className="preview-item-content">
+              <p className="preview-subject mb-1"><Trans>Vehicles</Trans></p>
+            </div>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    )
+  }
+
   const LoggedRouter = () => {
     return (
       <ul className="navbar-nav navbar-nav-right">
-        <Dropdown alignRight as="li" className="nav-item d-none d-lg-block">
-          <Dropdown.Toggle className="nav-link btn btn-success create-new-button no-caret">
-            + <Trans>Create New Project</Trans>
-          </Dropdown.Toggle>
 
-          <Dropdown.Menu className="navbar-dropdown preview-list create-new-dropdown-menu">
-            <h6 className="p-3 mb-0"><Trans>Projects</Trans></h6>
-            <Dropdown.Divider />
-            <Dropdown.Item href="!#" onClick={evt => evt.preventDefault()} className="preview-item">
-              <div className="preview-thumbnail">
-                <div className="preview-icon bg-dark rounded-circle">
-                  <i className="mdi mdi-file-outline text-primary"></i>
-                </div>
-              </div>
-              <div className="preview-item-content">
-                <p className="preview-subject ellipsis mb-1"><Trans>Software Development</Trans></p>
-              </div>
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="!#" onClick={evt => evt.preventDefault()} className="preview-item">
-              <div className="preview-thumbnail">
-                <div className="preview-icon bg-dark rounded-circle">
-                  <i className="mdi mdi-web text-info"></i>
-                </div>
-              </div>
-              <div className="preview-item-content">
-                <p className="preview-subject ellipsis mb-1"><Trans>UI Development</Trans></p>
-              </div>
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="!#" onClick={evt => evt.preventDefault()} className="preview-item">
-              <div className="preview-thumbnail">
-                <div className="preview-icon bg-dark rounded-circle">
-                  <i className="mdi mdi-layers text-danger"></i>
-                </div>
-              </div>
-              <div className="preview-item-content">
-                <p className="preview-subject ellipsis mb-1"><Trans>Software Testing</Trans></p>
-              </div>
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <p className="p-3 mb-0 text-center"><Trans>See all projects</Trans></p>
-          </Dropdown.Menu>
-        </Dropdown>
+        <LinksCreate />
+
         <li className="nav-item d-none d-lg-block">
           <a className="nav-link" href="!#" onClick={event => event.preventDefault()}>
             <i className="mdi mdi-view-grid"></i>
@@ -179,7 +191,7 @@ const Navbar = () => {
           <Dropdown.Toggle as="a" className="nav-link cursor-pointer no-caret">
             <div className="navbar-profile">
               <img className="img-xs rounded-circle" src='/assets/images/faces/face15.jpg' alt="profile" />
-              <p className="mb-0 d-none d-sm-block navbar-profile-name"><Trans>{ auth.user.username }</Trans></p>
+              <p className="mb-0 d-none d-sm-block navbar-profile-name"><Trans>{auth.user.username}</Trans></p>
               <i className="mdi mdi-menu-down d-none d-sm-block"></i>
             </div>
           </Dropdown.Toggle>
@@ -187,7 +199,9 @@ const Navbar = () => {
           <Dropdown.Menu className="navbar-dropdown preview-list navbar-profile-dropdown-menu">
             <h6 className="p-3 mb-0"><Trans>Profile</Trans></h6>
             <Dropdown.Divider />
-            <Dropdown.Item href="!#" onClick={evt => evt.preventDefault()} className="preview-item">
+            <Dropdown.Item className="preview-item"
+              onClick={(evt) => { evt.preventDefault(); return router.push('/profile') }}
+            >
               <div className="preview-thumbnail">
                 <div className="preview-icon bg-dark rounded-circle">
                   <i className="mdi mdi-settings text-success"></i>
@@ -217,50 +231,7 @@ const Navbar = () => {
   const NoLoggedRouter = () => {
     return (
       <ul className="navbar-nav navbar-nav-right">
-        <Dropdown alignRight as="li" className="nav-item d-none d-lg-block">
-          <Dropdown.Toggle className="nav-link btn btn-success create-new-button no-caret">
-            + <Trans>Create New Project</Trans>
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu className="navbar-dropdown preview-list create-new-dropdown-menu">
-            <h6 className="p-3 mb-0"><Trans>Projects</Trans></h6>
-            <Dropdown.Divider />
-            <Dropdown.Item className="preview-item">
-              <div className="preview-thumbnail">
-                <div className="preview-icon bg-dark rounded-circle">
-                  <i className="mdi mdi-file-outline text-primary"></i>
-                </div>
-              </div>
-              <div className="preview-item-content">
-                <p className="preview-subject ellipsis mb-1"><Trans>Software Development</Trans></p>
-              </div>
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item onClick={evt => evt.preventDefault()} className="preview-item">
-              <div className="preview-thumbnail">
-                <div className="preview-icon bg-dark rounded-circle">
-                  <i className="mdi mdi-web text-info"></i>
-                </div>
-              </div>
-              <div className="preview-item-content">
-                <p className="preview-subject ellipsis mb-1"><Trans>UI Development</Trans></p>
-              </div>
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item onClick={evt => evt.preventDefault()} className="preview-item">
-              <div className="preview-thumbnail">
-                <div className="preview-icon bg-dark rounded-circle">
-                  <i className="mdi mdi-layers text-danger"></i>
-                </div>
-              </div>
-              <div className="preview-item-content">
-                <p className="preview-subject ellipsis mb-1"><Trans>Software Testing</Trans></p>
-              </div>
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <p className="p-3 mb-0 text-center"><Trans>See all projects</Trans></p>
-          </Dropdown.Menu>
-        </Dropdown>
+        <LinksCreate />
         <Dropdown alignRight as="li" className="nav-item border-left">
           <Link to="/register" style={{ textDecoration: 'none', color: 'inherit' }}>
             <Dropdown.Toggle className="nav-link btn btn-dark create-new-button no-caret">

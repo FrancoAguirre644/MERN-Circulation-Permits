@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { putData } from '../../utils/fetchData';
@@ -33,7 +33,7 @@ const Edit = ({ match }) => {
 
         if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
 
-        const res = await putData(`persons/${person._id}`, person)
+        const res = await putData(`persons/${person._id}`, person, auth.token)
         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
         dispatch(updateItem(persons, person._id, res.person, 'ADD_PERSONS'))
@@ -43,7 +43,7 @@ const Edit = ({ match }) => {
         router.push('/persons')
     }
 
-    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
+    if(!auth.user || auth.user.profile !== 'admin') return null;
 
     return (
         <div className="row justify-content-center">
@@ -51,6 +51,7 @@ const Edit = ({ match }) => {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Update Person</h4>
+                        <hr />
                         <form className="forms-sample" onSubmit={handleSubmit}>
                             <Form.Group>
                                 <label>Fist Name</label>
@@ -67,7 +68,7 @@ const Edit = ({ match }) => {
                             <Form.Group>
                                 <label>Document</label>
                                 <Form.Control type="text" name="document" value={person.document}
-                                    pattern="[a-zA-Z]*" placeholder="Document"
+                                    placeholder="Document"
                                     onChange={handleChangeInput} />
                             </Form.Group>
                             <button type="submit" className="btn btn-primary mr-2 w-100">Update</button>

@@ -21,17 +21,25 @@ const siteController = {
         }
     },
     updateSite: async (req, res) => {
+
         try {
-            const { site, postalCode } = req.body;
 
-            const newSite = await Sites.findOneAndUpdate({ _id: req.params.id },
-                { site, postalCode },
-                { new: true })
+            if (req.user.profile === "admin") {
 
-            res.status(200).json({
-                msg: 'Site updated successfully.',
-                site: newSite._doc,
-            })
+                const { site, postalCode } = req.body;
+
+                const newSite = await Sites.findOneAndUpdate({ _id: req.params.id },
+                    { site, postalCode },
+                    { new: true })
+
+                res.status(200).json({
+                    msg: 'Site updated successfully.',
+                    site: newSite._doc,
+                })
+            } else {
+                res.status(400).json({ err: 'Profile is not valid.' })
+            }
+            
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }
@@ -39,9 +47,13 @@ const siteController = {
     deleteSite: async (req, res) => {
         try {
 
-            await Sites.findByIdAndDelete(req.params.id)
+            if (req.user.profile === "admin") {
+                await Sites.findByIdAndDelete(req.params.id)
+                res.status(200).json({ msg: 'Site deleted successfully.' })
+            } else {
+                res.status(400).json({ err: 'Profile is not valid.' })
+            }
 
-            res.status(200).json({ msg: 'Site deleted successfully.' })
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }

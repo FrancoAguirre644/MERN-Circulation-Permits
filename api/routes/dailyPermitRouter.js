@@ -3,8 +3,8 @@ const dailyPermitController = require('../controllers/dailyPermitController')
 const auth = require('../middlewares/auth')
 
 router.route('/')
-    .get(auth, dailyPermitController.getAllDailyPermits)
-    .post(auth, dailyPermitController.createDailyPermit)
+    .get(dailyPermitController.getAllDailyPermits)
+    .post(dailyPermitController.createDailyPermit)
 
 router.route('/:id')
     .get(auth, dailyPermitController.getDailyPermit)

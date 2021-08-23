@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { updateItem } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { putData } from '../../utils/fetchData';
@@ -28,7 +28,7 @@ const Edit = ({ match }) => {
     const handleSubmit = async e => {
         e.preventDefault()
 
-        const res = await putData(`users/${user._id}`, user)
+        const res = await putData(`users/${user._id}`, user, auth.token)
         if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
 
         dispatch(updateItem(users, user._id, res.user, 'ADD_USERS'))
@@ -38,7 +38,7 @@ const Edit = ({ match }) => {
         router.push('/users')
     }
 
-    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
+    if(!auth.user || auth.user.profile !== 'admin') return null;
 
     return (
         <div className="row justify-content-center">
@@ -46,6 +46,7 @@ const Edit = ({ match }) => {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Update User</h4>
+                        <hr />
                         <form className="forms-sample" onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-md-6">

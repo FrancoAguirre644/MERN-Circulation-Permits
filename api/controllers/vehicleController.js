@@ -22,26 +22,37 @@ const vehicleController = {
     },
     updateVehicle: async (req, res) => {
         try {
-            const { patent, brand, model, year } = req.body;
 
-            const newVehicle = await Vehicles.findOneAndUpdate({ _id: req.params.id },
-                { patent, brand, model, year },
-                { new: true })
+            if (req.user.profile === "admin") {
+                const { patent, brand, model, year } = req.body;
 
-            res.status(200).json({
-                msg: 'Vehicle updated successfully.',
-                vehicle: newVehicle._doc,
-            })
+                const newVehicle = await Vehicles.findOneAndUpdate({ _id: req.params.id },
+                    { patent, brand, model, year },
+                    { new: true })
+
+                res.status(200).json({
+                    msg: 'Vehicle updated successfully.',
+                    vehicle: newVehicle._doc,
+                })
+            } else {
+                res.status(400).json({ err: 'Profile is not valid.' })
+            }
+
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }
     },
     deleteVehicle: async (req, res) => {
+
         try {
 
-            await Vehicles.findByIdAndDelete(req.params.id)
+            if (req.user.profile === "admin") {
+                await Vehicles.findByIdAndDelete(req.params.id)
+                res.status(200).json({ msg: 'Vehicle deleted successfully.' })
+            } else {
+                res.status(400).json({ err: 'Profile is not valid.' })
+            }
 
-            res.status(200).json({ msg: 'Vehicle deleted successfully.' })
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }

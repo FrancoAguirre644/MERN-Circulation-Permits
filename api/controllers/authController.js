@@ -30,13 +30,13 @@ const authController = {
             const { email, password } = req.body;
 
             const user = await Users.findOne({ email: email })
-            if (!user) return res.status(400).json({ msg: "User does not exist." })
+            if (!user) return res.status(400).json({ err: "User does not exist." })
 
             const isMatch = await bcrypt.compare(password, user.password)
-            if (!isMatch) return res.status(400).json({ msg: "Incorrect Password." })
+            if (!isMatch) return res.status(400).json({ err: "Incorrect Password." })
 
             // if login success create a token
-            const payload = { id: user._id, name: user.username }
+            const payload = { id: user._id, name: user.username, profile: user.profile }
 
             const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "4d" })
 
@@ -61,7 +61,7 @@ const authController = {
             jwt.verify(token, process.env.TOKEN_SECRET, async (err, verified) => {
                 if (err) return res.status(400).json({err: "token invalid"})
 
-                const user = await Users.findById(verified.id).populate("user", "-password")
+                const user = await Users.findById(verified.id).select(["-password"])
 
                 if (!user) return res.status(400).json({err: "user not exists"})
 
@@ -72,6 +72,19 @@ const authController = {
 
         } catch (err) {
             return res.status(500).json({ msg: err.message })
+        }
+    },
+    resetPassword: async (req, res) => {
+        try {
+            const { password } = req.body
+            const passwordHash = await bcrypt.hash(password, 10)
+    
+            await Users.findOneAndUpdate({ _id: req.user.id }, { password: passwordHash })
+    
+            res.json({ msg: 'Update Success!' })
+    
+        } catch (err) {
+            return res.status(500).json({ err: err.message })
         }
     }
 }

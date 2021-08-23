@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { DataContext } from '../../store/GlobalState';
 import { postData } from '../../utils/fetchData';
 import { validateRegister } from '../../utils/valid'
@@ -33,7 +33,7 @@ const Create = () => {
 
         if (errorMsg) return dispatch({ type: 'NOTIFY', payload: { error: errorMsg, show: true } })
 
-        const res = await postData('users', user)
+        const res = await postData('users', user, auth.token)
         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
         dispatch({ type: "ADD_USERS", payload: [...users, res.newUser] })
@@ -44,7 +44,7 @@ const Create = () => {
 
     }
 
-    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
+    if(!auth.user || auth.user.profile !== 'admin') return null;
 
     return (
         <div className="row justify-content-center">
@@ -54,6 +54,7 @@ const Create = () => {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Create User</h4>
+                        <hr />
                         <form className="forms-sample" onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-md-6">

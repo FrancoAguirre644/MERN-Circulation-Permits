@@ -25,7 +25,7 @@ const ModalCustom = () => {
 
     const deleteProfile = async (item) => {
         
-        await deleteData(`profiles/${item.id}`)
+        await deleteData(`profiles/${item.id}`, auth.token)
             .then(res => {
                 if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
@@ -37,7 +37,7 @@ const ModalCustom = () => {
 
     const deleteSite = async (item) => {
         
-        await deleteData(`sites/${item.id}`)
+        await deleteData(`sites/${item.id}`, auth.token)
             .then(res => {
                 if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
@@ -49,7 +49,7 @@ const ModalCustom = () => {
 
     const deletePerson = async (item) => {
         
-        await deleteData(`persons/${item.id}`)
+        await deleteData(`persons/${item.id}`, auth.token)
             .then(res => {
                 if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 
@@ -61,7 +61,7 @@ const ModalCustom = () => {
 
     const deleteVehicle = async (item) => {
         
-        await deleteData(`vehicles/${item.id}`)
+        await deleteData(`vehicles/${item.id}`, auth.token)
             .then(res => {
                 if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
 

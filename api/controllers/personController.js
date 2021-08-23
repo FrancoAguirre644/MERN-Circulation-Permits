@@ -22,16 +22,22 @@ const personController = {
     },
     updatePerson: async (req, res) => {
         try {
-            const { firstName, lastName, document } = req.body;
+            
+            if(req.user.profile === "admin") {
+                const { firstName, lastName, document } = req.body;
 
-            const newPerson = await Persons.findOneAndUpdate({ _id: req.params.id },
-                { firstName, lastName, document },
-                { new: true })
+                const newPerson = await Persons.findOneAndUpdate({ _id: req.params.id },
+                    { firstName, lastName, document },
+                    { new: true })
+    
+                res.status(200).json({
+                    msg: 'Person updated successfully.',
+                    person: newPerson._doc,
+                })
+            } else {
+                res.status(400).json({err: 'Profile is not valid.'})
+            }
 
-            res.status(200).json({
-                msg: 'Person updated successfully.',
-                person: newPerson._doc,
-            })
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }
@@ -39,9 +45,13 @@ const personController = {
     deletePerson: async (req, res) => {
         try {
 
-            await Persons.findByIdAndDelete(req.params.id)
+            if(req.user.profile === "admin") {
+                await Persons.findByIdAndDelete(req.params.id)
+                res.status(200).json({ msg: 'Person deleted successfully.' })
+            } else {
+                res.status(400).json({err: 'Profile is not valid.'})
+            }
 
-            res.status(200).json({ msg: 'Person deleted successfully.' })
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }

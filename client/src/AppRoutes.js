@@ -1,6 +1,12 @@
 import React, { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+import Profile from './components/auth/Profile'
+
+import Dashboard from './components/Dashboard'
+
 import Profiles from './components/profile/Index'
 
 import Users from './components/user/Index'
@@ -29,21 +35,7 @@ import ReportFromVehicles from './components/reports/ReportFromVehicles'
 
 import Spinner from './ui/shared/Spinner';
 
-const Buttons = lazy(() => import('./ui/basic-ui/Buttons'));
-const Dropdowns = lazy(() => import('./ui/basic-ui/Dropdowns'));
-const Typography = lazy(() => import('./ui/basic-ui/Typography'));
-
-const BasicTable = lazy(() => import('./ui/tables/BasicTable'));
-
 const Mdi = lazy(() => import('./ui/icons/Mdi'));
-
-const Form = lazy(() => import('./ui/form-elements/BasicElements'));
-
-const Login = lazy(() => import('./components/auth/Login'));
-const Register = lazy(() => import('./components/auth/Register'));
-
-const Dashboard = lazy(() => import('./components/Dashboard'));
-
 
 const AppRoutes = () => {
 
@@ -51,19 +43,11 @@ const AppRoutes = () => {
     <Suspense fallback={<Spinner />}>
       <Switch>
 
-        <Route path="/basic-ui/buttons" component={Buttons} />
-        <Route path="/basic-ui/dropdowns" component={Dropdowns} />
-        <Route path="/basic-ui/typography" component={Typography} />
-        <Route path="/basic-ui/typography" component={Typography} />
-
-        <Route path="/form-elements/basic-elements" component={Form} />
-
-        <Route path="/tables/basic-table" component={BasicTable} />
-
         <Route path="/icons/mdi" component={Mdi} />
 
         <Route path="/login" component={Login} exact />
         <Route path="/register" component={Register} exact />
+        <Route path="/profile" component={Profile} exact />
 
         <Route path="/" component={Dashboard} exact />
 

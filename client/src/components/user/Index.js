@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { generatePDFUser } from '../../services/ReportGeneratorUser'
 
 const Index = () => {
@@ -9,7 +9,7 @@ const Index = () => {
 
     const { auth, users } = state
 
-    if(!auth.user || auth.user.profile !== 'admin') return  <Redirect to="/" />;
+    if(!auth.user || auth.user.profile !== 'admin') return null;
 
     return (
         <div className="col-lg-12 grid-margin stretch-card">
