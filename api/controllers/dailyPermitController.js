@@ -1,4 +1,5 @@
 const DailyPermits = require('../models/dailyPermitModel')
+const bson = require('bson')
 
 const dailyPermitController = {
     createDailyPermit: async (req, res) => {
@@ -9,7 +10,8 @@ const dailyPermitController = {
                 person: personId,
                 from: fromSiteId,
                 to: toSiteId,
-                reason
+                reason,
+                qr: new bson.ObjectId()
             })
 
             await newDailyPermit.save()
@@ -48,6 +50,17 @@ const dailyPermitController = {
             const dailyPermits = await DailyPermits.find().populate(['person', 'from', 'to'])
             
             res.status(200).json({ dailyPermits })
+        } catch (err) {
+            return res.status(500).json({ err: err.message })
+        }
+    },
+    validateQR: async (req, res) => {
+        try {
+
+            const dailyPermit = await DailyPermits.findOne({ qr: req.params.qr }).populate(['person', 'from', 'to'])
+
+            res.status(200).json({dailyPermit})
+            
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }

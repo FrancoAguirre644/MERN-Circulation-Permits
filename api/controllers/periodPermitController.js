@@ -1,4 +1,5 @@
 const PeriodPermits = require('../models/periodPermitModel')
+const bson = require('bson')
 
 const periodPermitController = {
     createPeriodPermit: async (req, res) => {
@@ -11,7 +12,8 @@ const periodPermitController = {
                 to: toSiteId,
                 vehicle: vehicleId,
                 days,
-                vacations
+                vacations,
+                qr: new bson.ObjectId()
             })
 
             await newPeriodPermit.save()
@@ -53,7 +55,18 @@ const periodPermitController = {
         } catch (err) {
             return res.status(500).json({ err: err.message })
         }
-    } 
+    } ,
+    validateQR: async (req, res) => {
+        try {
+
+            const periodPermit = await PeriodPermits.findOne({ qr: req.params.qr }).populate(['person', 'from', 'to', 'vehicle'])
+
+            res.status(200).json({periodPermit})
+            
+        } catch (err) {
+            return res.status(500).json({ err: err.message })
+        }
+    }
 }
 
 module.exports = periodPermitController

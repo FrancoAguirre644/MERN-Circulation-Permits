@@ -10,5 +10,8 @@ router.route('/:id')
     .get(auth, dailyPermitController.getDailyPermit)
     .delete(auth, dailyPermitController.deleteDailyPermit)
 
+router.route('/validateQR/:qr')
+    .get(dailyPermitController.validateQR)
+
 
 module.exports = router

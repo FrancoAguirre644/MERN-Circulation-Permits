@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { generatePDFDPermit } from '../../services/ReportGeneratorDPermit'
+import { Modal } from 'react-bootstrap'
+import QR from '../../components/QR'
 
 const ReportFromPersons = () => {
 
@@ -9,6 +11,16 @@ const ReportFromPersons = () => {
     const { persons, dailyPermits } = state
 
     const [dailyPermitsResults, setDailyPermitsResults] = useState([])
+
+    const [show, setShow] = useState(false)
+
+    const [qrLink, setQrLink] = useState('')
+
+    const handleClose = () => setShow(false)
+    const handleShow = (dailyPermit) => {
+        setQrLink(dailyPermit.qr)
+        setShow(true)
+    }
 
     useEffect(() => {
         setDailyPermitsResults(dailyPermits)
@@ -24,6 +36,17 @@ const ReportFromPersons = () => {
 
     return (
         <>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>QR</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="row justify-content-center">
+                    <QR value={qrLink} />
+                </Modal.Body>
+                <Modal.Footer></Modal.Footer>
+            </Modal>
+
             <div className="col-lg-12 grid-margin stretch-card">
                 <div className="card">
                     <div className="card-body">
@@ -45,11 +68,11 @@ const ReportFromPersons = () => {
                         {
                             dailyPermitsResults.length > 0 && (
                                 <button className="btn btn-success btn-icon-text mt-2 p-2 w-100"
-                                    onClick={() => 
+                                    onClick={() =>
                                         generatePDFDPermit(
                                             dailyPermitsResults,
                                             `Bring Permit per Person.`
-                                    )}
+                                        )}
                                 >
                                     <i className="mdi mdi-printer btn-icon-append"></i>
                                     Print
@@ -72,6 +95,7 @@ const ReportFromPersons = () => {
                                         <th> From </th>
                                         <th> To </th>
                                         <th> Reason </th>
+                                        <th> QR </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,6 +110,14 @@ const ReportFromPersons = () => {
                                                 <td> {dailyPermit.from.site} </td>
                                                 <td> {dailyPermit.to.site} </td>
                                                 <td className="text-capitalize"> {dailyPermit.reason} </td>
+                                                <td>
+                                                    <div class="badge badge-outline-success"
+                                                        style={{ 'cursor': 'pointer' }}
+                                                        onClick={() => handleShow(dailyPermit)}
+                                                    >
+                                                        Approved
+                                                    </div>
+                                                </td>
                                             </tr>
                                         ))
                                     }

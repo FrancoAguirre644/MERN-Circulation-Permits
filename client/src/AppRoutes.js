@@ -34,6 +34,7 @@ import ReportBetweenDatesAndSites from './pages/reports/ReportBetweenDatesAndSit
 import ReportFromVehicles from './pages/reports/ReportFromVehicles'
 
 import Spinner from './components/Spinner';
+import ValidationQR from './pages/permits/ValidationQR';
 
 const AppRoutes = () => {
 
@@ -66,6 +67,8 @@ const AppRoutes = () => {
         <Route path="/vehicles/:id" component={EditVehicle} exact />
 
         <Route path="/permits" component={Permits} exact />
+
+        <Route path="/validation/qr/:qr" component={ValidationQR} exact />
 
         <Route path="/reports" component={Reports} exact />
         <Route path="/reports/from/persons" component={ReportFromPersons} exact />

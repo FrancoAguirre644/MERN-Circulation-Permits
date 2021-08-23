@@ -24,6 +24,10 @@ const dailyPermitSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    qr: {
+        type: String,
+        required: true,
+    }
 }, {
     timestamps: true
 })

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bson = require('bson')
 
 const periodPermitSchema = new mongoose.Schema({
     person: {
@@ -33,6 +34,10 @@ const periodPermitSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    qr: {
+        type: String,
+        required: true,
+    }
 }, {
     timestamps: true
 })
