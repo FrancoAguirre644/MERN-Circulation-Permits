@@ -58,12 +58,12 @@ it together with a QR code._
 ```
 ---
 ```
-1. Generación del QR para un permiso en particular. (Sin necesidad de estar logueado en el sistema)
+1. Generation of the QR for a particular permit. (No need to be logged into the system)
 ```
 ```
-2. Visualización de datos del permiso desde una página pública. (Sin necesidad de estar logueado en el sistema)
+2. Viewing permission data from a public page. (No need to be logged into the system)
 ```
 
-## Licencia 📄
+## License 📄
 
-This project is under the License (Your License) - see the LICENSE.md file for details.
+This project is under the License (MIT License) - see the LICENSE.md file for details.
